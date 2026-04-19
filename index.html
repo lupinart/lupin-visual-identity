@@ -6,7 +6,7 @@
 <title>Lupin Visual · Visual Identity System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Noto+Serif+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Noto+Serif+TC:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
 <style>
 /* ===== Reset & base ===== */
 *, *::before, *::after { box-sizing: border-box; }
@@ -37,7 +37,7 @@ button { font: inherit; cursor: pointer; }
   --brand: #18B7BE;
   --brand-deep: #178CA4;
   --brand-soft: rgba(24, 183, 190, 0.10);
-  --accent: #F43F5E;
+  --accent: #C07855;
   --hairline: rgba(7, 42, 64, 0.10);
   --hairline-strong: rgba(7, 42, 64, 0.22);
   --shadow-soft: 0 20px 40px -15px rgba(7, 42, 64, 0.10);
@@ -51,38 +51,8 @@ button { font: inherit; cursor: pointer; }
   --grain-opacity: 0.0;
   --display-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
   --heading-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
-  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
-  --serif-font: "Fraunces", "Noto Serif TC", serif;
-  --mono-font: "JetBrains Mono", ui-monospace, monospace;
-}
-
-/* Editorial Minimal */
-[data-theme="editorial"] {
-  --bg: #FAFAF8;
-  --bg-elev: #FFFFFF;
-  --bg-inverse: #0A0A0A;
-  --fg: #0A0A0A;
-  --fg-muted: rgba(10, 10, 10, 0.60);
-  --fg-faint: rgba(10, 10, 10, 0.30);
-  --fg-on-inverse: #FAFAF8;
-  --brand: #127A7F;
-  --brand-deep: #0E5B5F;
-  --brand-soft: rgba(18, 122, 127, 0.08);
-  --accent: #0A0A0A;
-  --hairline: rgba(10, 10, 10, 0.14);
-  --hairline-strong: rgba(10, 10, 10, 0.32);
-  --shadow-soft: 0 1px 0 rgba(10, 10, 10, 0.05);
-  --shadow-hover: 0 2px 0 rgba(10, 10, 10, 0.10);
-  --glow: none;
-  --radius-s: 2px;
-  --radius-m: 3px;
-  --radius-l: 4px;
-  --radius-xl: 6px;
-  --radius-pill: 4px;
-  --grain-opacity: 0.0;
-  --display-font: "Fraunces", "Noto Serif TC", serif;
-  --heading-font: "Fraunces", "Noto Serif TC", serif;
-  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --body-font: "Noto Sans TC", "Inter", sans-serif;
+  --decor-font: "Playfair Display", "Noto Serif TC", serif;
   --serif-font: "Fraunces", "Noto Serif TC", serif;
   --mono-font: "JetBrains Mono", ui-monospace, monospace;
 }
@@ -113,9 +83,13 @@ button { font: inherit; cursor: pointer; }
   --grain-opacity: 0.0;
   --display-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
   --heading-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
-  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --body-font: "Noto Sans TC", "Inter", sans-serif;
+  --decor-font: "Playfair Display", "Noto Serif TC", serif;
   --serif-font: "Fraunces", "Noto Serif TC", serif;
   --mono-font: "JetBrains Mono", ui-monospace, monospace;
+  --info: #4A90C4;
+  --info-bg: #E8F3FA;
+  --link: #3A7DB5;
 }
 
 /* Warm Craft */
@@ -570,14 +544,6 @@ const THEMES = [
     keywords: ["Rounded", "Glassmorphism", "Calm", "Trustworthy"],
   },
   {
-    id: "editorial",
-    name: "Editorial Minimal",
-    zh: "編輯極簡",
-    description: "瑞士排版風格，襯線標題、鋒利直角、大量留白。把鹿頭當成一個鉛字印章。安靜、優雅、永恆。",
-    palette: ["#FAFAF8", "#0A0A0A", "#127A7F", "#0A0A0A"],
-    keywords: ["Serif", "Grid", "Quiet", "Timeless"],
-  },
-  {
     id: "warm-paper",
     name: "Warm Paper",
     zh: "溫白",
@@ -838,18 +804,6 @@ function CoverSection({ theme, themeMeta }) {
             </div>
           </div>
 
-          <div className="cover-symbol" style={{ justifySelf: "end", alignSelf: "end" }}>
-            <img
-              src="assets/symbol-stacked.svg"
-              alt="Lupin Visual"
-              style={{
-                width: "clamp(180px, 22vw, 280px)",
-                height: "auto",
-                filter: theme === "editorial" ? "none" : "none",
-                mixBlendMode: theme === "warm-craft" ? "multiply" : "normal",
-              }}
-            />
-          </div>
         </div>
 
         {/* Meta strip under title */}
@@ -2411,7 +2365,7 @@ function App() {
   // Restore from localStorage
   useEffectRoot(() => {
     const saved = localStorage.getItem("lupin:theme");
-    if (saved && ["soft-tech", "editorial", "warm-paper", "warm-craft"].includes(saved)) {
+    if (saved && ["soft-tech", "warm-paper", "warm-craft"].includes(saved)) {
       setTheme(saved);
     }
   }, []);
@@ -2497,7 +2451,7 @@ function ThemePicker({ theme, onChangeTheme }) {
         }}>
           同一套 logo，可以用三種不同的氣質被敘述。點擊下方任一張卡片，整份識別系統會即時切換。
         </p>
-        <div className="grid g4">
+        <div className="grid g3">
           {THEMES.map(t => (
             <button
               key={t.id}
@@ -2560,7 +2514,7 @@ function TweaksPanel({ theme, onChangeTheme }) {
       <h5>Tweaks · 識別系統切換</h5>
       <div className="row">
         <label>Theme</label>
-        <div className="seg" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+        <div className="seg" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
           {THEMES.map(t => (
             <button
               key={t.id}

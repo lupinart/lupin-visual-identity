@@ -1,0 +1,2633 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lupin Visual · Visual Identity System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Noto+Serif+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ===== Reset & base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Noto Sans TC", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  font-feature-settings: "kern", "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--fg);
+  background: var(--bg);
+  transition: background-color .6s ease, color .6s ease;
+}
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; }
+
+/* ========== THEME TOKENS ========== */
+/* Default = Soft Tech */
+:root,
+[data-theme="soft-tech"] {
+  --bg: #F9F7F0;
+  --bg-elev: #FFFFFF;
+  --bg-inverse: #072A40;
+  --fg: #072A40;
+  --fg-muted: rgba(7, 42, 64, 0.62);
+  --fg-faint: rgba(7, 42, 64, 0.35);
+  --fg-on-inverse: #F9F7F0;
+  --brand: #18B7BE;
+  --brand-deep: #178CA4;
+  --brand-soft: rgba(24, 183, 190, 0.10);
+  --accent: #F43F5E;
+  --hairline: rgba(7, 42, 64, 0.10);
+  --hairline-strong: rgba(7, 42, 64, 0.22);
+  --shadow-soft: 0 20px 40px -15px rgba(7, 42, 64, 0.10);
+  --shadow-hover: 0 30px 60px -15px rgba(24, 183, 190, 0.25);
+  --glow: 0 0 30px rgba(24, 183, 190, 0.28);
+  --radius-s: 14px;
+  --radius-m: 22px;
+  --radius-l: 32px;
+  --radius-xl: 44px;
+  --radius-pill: 999px;
+  --grain-opacity: 0.0;
+  --display-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+  --heading-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --serif-font: "Fraunces", "Noto Serif TC", serif;
+  --mono-font: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Editorial Minimal */
+[data-theme="editorial"] {
+  --bg: #FAFAF8;
+  --bg-elev: #FFFFFF;
+  --bg-inverse: #0A0A0A;
+  --fg: #0A0A0A;
+  --fg-muted: rgba(10, 10, 10, 0.60);
+  --fg-faint: rgba(10, 10, 10, 0.30);
+  --fg-on-inverse: #FAFAF8;
+  --brand: #127A7F;
+  --brand-deep: #0E5B5F;
+  --brand-soft: rgba(18, 122, 127, 0.08);
+  --accent: #0A0A0A;
+  --hairline: rgba(10, 10, 10, 0.14);
+  --hairline-strong: rgba(10, 10, 10, 0.32);
+  --shadow-soft: 0 1px 0 rgba(10, 10, 10, 0.05);
+  --shadow-hover: 0 2px 0 rgba(10, 10, 10, 0.10);
+  --glow: none;
+  --radius-s: 2px;
+  --radius-m: 3px;
+  --radius-l: 4px;
+  --radius-xl: 6px;
+  --radius-pill: 4px;
+  --grain-opacity: 0.0;
+  --display-font: "Fraunces", "Noto Serif TC", serif;
+  --heading-font: "Fraunces", "Noto Serif TC", serif;
+  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --serif-font: "Fraunces", "Noto Serif TC", serif;
+  --mono-font: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Warm Paper — Editorial colors + Soft Tech radius + warm copper accent */
+[data-theme="warm-paper"] {
+  --bg: #FAFAF8;
+  --bg-elev: #FFFFFF;
+  --bg-inverse: #0A0A0A;
+  --fg: #0A0A0A;
+  --fg-muted: rgba(10, 10, 10, 0.60);
+  --fg-faint: rgba(10, 10, 10, 0.30);
+  --fg-on-inverse: #FAFAF8;
+  --brand: #127A7F;
+  --brand-deep: #0E5B5F;
+  --brand-soft: rgba(18, 122, 127, 0.10);
+  --accent: #C07855;
+  --hairline: rgba(10, 10, 10, 0.10);
+  --hairline-strong: rgba(10, 10, 10, 0.22);
+  --shadow-soft: 0 20px 40px -15px rgba(10, 10, 10, 0.08);
+  --shadow-hover: 0 30px 60px -15px rgba(18, 122, 127, 0.22);
+  --glow: 0 0 30px rgba(18, 122, 127, 0.20);
+  --radius-s: 14px;
+  --radius-m: 22px;
+  --radius-l: 32px;
+  --radius-xl: 44px;
+  --radius-pill: 999px;
+  --grain-opacity: 0.0;
+  --display-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+  --heading-font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --serif-font: "Fraunces", "Noto Serif TC", serif;
+  --mono-font: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Warm Craft */
+[data-theme="warm-craft"] {
+  --bg: #F3ECDD;
+  --bg-elev: #FBF7EC;
+  --bg-inverse: #2B1A12;
+  --fg: #2B1A12;
+  --fg-muted: rgba(43, 26, 18, 0.65);
+  --fg-faint: rgba(43, 26, 18, 0.35);
+  --fg-on-inverse: #F3ECDD;
+  --brand: #C85A3E;
+  --brand-deep: #9E3E27;
+  --brand-soft: rgba(200, 90, 62, 0.12);
+  --accent: #16807F;
+  --hairline: rgba(43, 26, 18, 0.14);
+  --hairline-strong: rgba(43, 26, 18, 0.30);
+  --shadow-soft: 0 16px 32px -14px rgba(43, 26, 18, 0.18);
+  --shadow-hover: 0 24px 48px -18px rgba(200, 90, 62, 0.35);
+  --glow: 0 0 28px rgba(200, 90, 62, 0.28);
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 24px;
+  --radius-xl: 36px;
+  --radius-pill: 999px;
+  --grain-opacity: 0.22;
+  --display-font: "Fraunces", "Noto Serif TC", serif;
+  --heading-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --body-font: "Noto Sans TC", "Plus Jakarta Sans", sans-serif;
+  --serif-font: "Fraunces", "Noto Serif TC", serif;
+  --mono-font: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ========== PAGE LAYOUT ========== */
+.page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+.page::before {
+  /* subtle paper grain for warm-craft */
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.10 0 0 0 0 0.07 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: var(--grain-opacity);
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+@media (max-width: 900px) { .container { padding: 0 24px; } }
+
+section.sys {
+  padding: 120px 0;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 900px) { section.sys { padding: 72px 0; } }
+
+/* Section header chrome */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 20px;
+}
+.eyebrow .num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-pill);
+  color: var(--fg);
+}
+[data-theme="editorial"] .eyebrow .num { border-radius: 2px; }
+
+.section-title {
+  font-family: var(--display-font);
+  font-weight: 700;
+  font-size: clamp(36px, 5.2vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px 0;
+  text-wrap: balance;
+}
+.section-sub {
+  font-family: var(--body-font);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  max-width: 62ch;
+  margin: 0 0 56px 0;
+}
+[data-theme="editorial"] .section-title em,
+[data-theme="warm-craft"] .section-title em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Divider between sections */
+.rule {
+  height: 1px;
+  background: var(--hairline);
+  width: 100%;
+}
+
+/* ==== Cards & tiles ==== */
+.card {
+  background: var(--bg-elev);
+  border-radius: var(--radius-l);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+}
+[data-theme="editorial"] .card {
+  border: 1px solid var(--hairline-strong);
+  box-shadow: none;
+}
+.card-tight {
+  padding: 20px;
+  border-radius: var(--radius-m);
+}
+
+/* Logo tiles */
+.logo-tile {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  border-radius: var(--radius-l);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+  padding: 36px;
+}
+[data-theme="editorial"] .logo-tile {
+  border: 1px solid var(--hairline-strong);
+  box-shadow: none;
+  border-radius: 2px;
+}
+.logo-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.logo-tile .cap {
+  position: absolute;
+  left: 16px; bottom: 14px;
+  font-family: var(--mono-font);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.logo-tile.dark { background: var(--bg-inverse); }
+.logo-tile.dark .cap { color: rgba(255,255,255,0.5); }
+.logo-tile.teal { background: var(--brand); }
+.logo-tile.teal .cap { color: rgba(255,255,255,0.7); }
+.logo-tile.accent { background: var(--accent); }
+.logo-tile.accent .cap { color: rgba(255,255,255,0.8); }
+.logo-tile.cream { background: var(--bg); }
+
+/* Color swatches */
+.swatch {
+  border-radius: var(--radius-l);
+  padding: 28px;
+  min-height: 220px;
+  color: var(--c-on);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+[data-theme="editorial"] .swatch {
+  border-radius: 2px;
+  box-shadow: none;
+  border: 1px solid var(--hairline-strong);
+}
+.swatch .name {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.swatch .ratio {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.swatch .meta {
+  font-family: var(--mono-font);
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+.swatch .meta b { display:block; font-weight: 500; opacity: 0.55; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2px; }
+
+/* Button examples */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 26px;
+  border-radius: var(--radius-pill);
+  border: 0;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  text-decoration: none;
+}
+.btn.filled {
+  background: var(--bg-inverse);
+  color: var(--fg-on-inverse);
+  box-shadow: 0 12px 28px -12px rgba(7, 42, 64, 0.5);
+}
+.btn.filled:hover { background: var(--brand-deep); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.btn.primary { background: var(--brand); color: #fff; }
+.btn.primary:hover { background: var(--brand-deep); transform: translateY(-2px); }
+.btn.outline {
+  background: transparent;
+  border: 2px solid var(--hairline-strong);
+  color: var(--fg);
+}
+.btn.outline:hover { border-color: var(--fg); }
+.btn.tonal {
+  background: var(--brand-soft);
+  color: var(--fg);
+}
+[data-theme="editorial"] .btn { border-radius: 2px; }
+[data-theme="editorial"] .btn.filled { box-shadow: none; }
+
+/* Inputs */
+.input {
+  display: block;
+  width: 100%;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline-strong);
+  background: var(--bg-elev);
+  color: var(--fg);
+  font-family: var(--body-font);
+  font-size: 15px;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px var(--brand-soft);
+}
+[data-theme="editorial"] .input { border-radius: 2px; }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+}
+[data-theme="editorial"] .tag { border-radius: 2px; }
+
+/* Tweaks panel */
+.tweaks {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  z-index: 100;
+  background: var(--bg-elev);
+  border-radius: var(--radius-l);
+  padding: 20px;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--hairline);
+  min-width: 260px;
+  backdrop-filter: blur(12px);
+  font-family: var(--body-font);
+}
+[data-theme="editorial"] .tweaks { border-radius: 2px; }
+.tweaks h5 {
+  margin: 0 0 14px 0;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.tweaks .row { display: grid; gap: 8px; margin-bottom: 14px; }
+.tweaks .row:last-child { margin-bottom: 0; }
+.tweaks label {
+  font-size: 11px;
+  color: var(--fg-muted);
+  font-family: var(--mono-font);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.tweaks .seg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--brand-soft);
+  border-radius: var(--radius-pill);
+}
+[data-theme="editorial"] .tweaks .seg { border-radius: 2px; }
+.tweaks .seg button {
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  transition: all .2s ease;
+}
+[data-theme="editorial"] .tweaks .seg button { border-radius: 2px; }
+.tweaks .seg button.active {
+  background: var(--bg-elev);
+  color: var(--fg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Nav */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 14px 0;
+  backdrop-filter: blur(16px) saturate(1.2);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  border-bottom: 1px solid var(--hairline);
+}
+.topnav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.topnav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+.topnav .brand .mark {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  background: var(--fg);
+  border-radius: var(--radius-pill);
+}
+.topnav .brand .mark img { width: 22px; height: 22px; }
+.topnav nav {
+  display: flex; gap: 4px;
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.topnav nav a {
+  color: var(--fg-muted);
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all .2s ease;
+}
+[data-theme="editorial"] .topnav nav a { border-radius: 2px; }
+.topnav nav a:hover { color: var(--fg); background: var(--brand-soft); }
+.topnav .theme-badge {
+  font-family: var(--mono-font);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-pill);
+  color: var(--fg-muted);
+}
+[data-theme="editorial"] .topnav .theme-badge { border-radius: 2px; }
+@media (max-width: 900px) {
+  .topnav nav { display: none; }
+}
+
+/* Utility grid */
+.grid { display: grid; gap: 24px; }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g5 { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 900px) {
+  .g2, .g3, .g4, .g5 { grid-template-columns: 1fr; }
+}
+
+/* Utilities */
+.mono { font-family: var(--mono-font); }
+.serif { font-family: var(--serif-font); }
+.center { text-align: center; }
+
+/* footnote / kicker */
+.kicker {
+  font-family: var(--mono-font);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+window.LUPIN_TWEAKS = {
+  "theme": "soft-tech",
+  "autoRotate": false
+};
+</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+// Theme definitions — used by app to show meta info for each theme and
+// expose the theme switcher.
+
+const THEMES = [
+  {
+    id: "soft-tech",
+    name: "Soft Tech",
+    zh: "柔性科技",
+    description: "現有 Design System — Teal + Navy + Cream，超圓角、膠囊形、毛玻璃。專業且親切，最適合科技產品溝通。",
+    palette: ["#F9F7F0", "#18B7BE", "#072A40", "#F43F5E"],
+    keywords: ["Rounded", "Glassmorphism", "Calm", "Trustworthy"],
+  },
+  {
+    id: "editorial",
+    name: "Editorial Minimal",
+    zh: "編輯極簡",
+    description: "瑞士排版風格，襯線標題、鋒利直角、大量留白。把鹿頭當成一個鉛字印章。安靜、優雅、永恆。",
+    palette: ["#FAFAF8", "#0A0A0A", "#127A7F", "#0A0A0A"],
+    keywords: ["Serif", "Grid", "Quiet", "Timeless"],
+  },
+  {
+    id: "warm-paper",
+    name: "Warm Paper",
+    zh: "溫白",
+    description: "Editorial 的紙白 × 墨黑 × 靜青，加入暖銅色取代重複的 Ink accent，搭配 Soft Tech 的超圓角。清晰現代，帶一點溫度。",
+    palette: ["#FAFAF8", "#0A0A0A", "#127A7F", "#C07855"],
+    keywords: ["Paper", "Rounded", "Warm Accent", "Modern"],
+  },
+  {
+    id: "warm-craft",
+    name: "Warm Craft",
+    zh: "溫暖工藝",
+    description: "米色紙感底 × 赤陶色 × 工藝感邊緣。放大鹿頭手繪的溫度，像一間下午有陽光的工作室。",
+    palette: ["#F3ECDD", "#C85A3E", "#2B1A12", "#16807F"],
+    keywords: ["Crafted", "Warm", "Tactile", "Studio"],
+  },
+];
+
+window.THEMES = THEMES;
+
+</script>
+
+<script type="text/babel">
+// Lupin Visual SVG brand assets — all use currentColor so they inherit
+// from whatever CSS 'color' they sit inside. Use <Symbol />, <SymbolOutline />,
+// <Wordmark />, <LockupH />, <LockupStacked />.
+
+function BrandMark({ size = 96, style, ...rest }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="679.52 576.14 132.52 132.52"
+      width={size}
+      height={size}
+      role="img"
+      aria-label="鹿苹視覺 Lupin Visual"
+      style={{ display: "block", ...style }}
+      {...rest}
+    >
+      <path fill="currentColor" d="M759.95,640.9c.7,1.24,1.99,1.94,3.32,1.94.63,0,1.28-.16,1.87-.49,1.83-1.03,2.48-3.35,1.45-5.19l-5.35-9.49c-1.03-1.83-3.36-2.48-5.19-1.45-1.83,1.03-2.48,3.35-1.45,5.19l5.35,9.49Z"></path>
+          <circle fill="currentColor" cx="750.04" cy="658.16" r="3.5"></circle>
+          <path fill="currentColor" d="M745.69,576.14c-36.54,0-66.26,29.72-66.26,66.26s29.72,66.26,66.26,66.26,66.26-29.72,66.26-66.26-29.72-66.26-66.26-66.26ZM689.58,629.14c2.58,6.12,8.61,7.97,14.44,7.97,2.23,0,4.42-.29,6.39-.7.77,1.61,1.76,3.15,3.05,4.47,2.59,2.64,6.01,4.02,9.95,4.02.25,0,.51,0,.76-.02,5.6-.25,8.63-2.92,10.18-5.11,4.83-6.82,1.76-17.61,1.39-18.82-.61-2.01-2.73-3.14-4.74-2.54-2.01.61-3.15,2.73-2.55,4.74.64,2.15,1.96,9.01-.32,12.22-.54.76-1.57,1.77-4.3,1.89-2.11.08-3.67-.45-4.92-1.72-3.26-3.32-3.58-10.62-3.43-13.16.13-2.1-1.46-3.91-3.56-4.04-2.11-.14-3.91,1.46-4.04,3.56-.04.61-.18,3.54.36,7.11-3.74.64-9.99,1.06-11.64-2.85-1.12-2.66-.72-9.45,0-14.42,10.24-16.35,28.41-27.25,49.08-27.25,18.6,0,35.18,8.83,45.77,22.51.03.41.11.82.28,1.21.89,2.1,2.84,8.4,1.23,12.25-.54,1.3-1.46,2.18-2.88,2.74-6.03,2.4-16.26-.85-19.69-2.3-1.5-.64-3.24-.25-4.33.96-1.09,1.21-1.28,2.99-.48,4.41l6.74,11.94c.7,1.24,1.99,1.94,3.32,1.94.63,0,1.28-.16,1.87-.49,1.83-1.03,2.48-3.36,1.45-5.19l-2.06-3.66c4.95,1.02,10.98,1.47,16.01-.54,3.32-1.32,5.77-3.71,7.1-6.91.07-.16.12-.33.18-.49,2.19,6.09,3.38,12.65,3.38,19.49,0,31.92-25.97,57.88-57.88,57.88-11.73,0-22.65-3.52-31.78-9.54,4.07-2.43,13.83-9.21,22.01-22.33,4.35-6.97,6.22-15.49,7.01-20.79,10.51,2.74,24.4,8.2,27.33,14.57.55,1.19.99,2.89-.47,5.52-1.35,2.43-3.23,3.95-5.75,4.67-6.63,1.89-16.16-2.2-19.26-3.94-2.05-1.15-4.64-.43-5.79,1.62-1.15,2.05-.42,4.64,1.62,5.79.58.33,14.32,7.95,25.73,4.71,4.75-1.34,8.41-4.28,10.88-8.73,2.45-4.41,2.71-8.97.76-13.2-6.28-13.63-34.69-19.75-37.9-20.4-1.21-.25-2.47.05-3.45.8-.98.76-1.58,1.9-1.64,3.13,0,.13-.76,12.88-6.28,21.74-9.04,14.5-20.35,20.21-20.46,20.27-.56.27-1.02.65-1.39,1.1-11.69-10.6-19.05-25.9-19.05-42.89,0-4.7.58-9.27,1.64-13.65.05.13.09.27.14.39Z"></path>
+    </svg>
+  );
+}
+
+function BrandMarkOutline({ size = 96, style, ...rest }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="615 78 210 185"
+      width={size}
+      height={size}
+      role="img"
+      aria-label="鹿苹視覺 Lupin Visual outline"
+      style={{ display: "block", ...style }}
+      {...rest}
+    >
+      <path fill="currentColor" d="M690.05,227.91c.49-.59,1.11-1.1,1.85-1.46.15-.07,15.17-7.67,27.18-26.92,7.34-11.76,8.33-28.7,8.34-28.87.09-1.64.88-3.16,2.18-4.16,1.3-1,2.96-1.4,4.57-1.07,4.27.87,41.99,8.99,50.33,27.09,2.59,5.62,2.24,11.68-1.01,17.53-3.28,5.9-8.14,9.8-14.45,11.59-15.15,4.29-33.39-5.82-34.16-6.26-2.72-1.53-3.68-4.97-2.15-7.69,1.53-2.72,4.97-3.68,7.69-2.15,4.12,2.3,16.78,7.74,25.58,5.23,3.35-.95,5.85-2.98,7.64-6.2,1.94-3.49,1.35-5.75.63-7.33-3.89-8.46-22.35-15.72-36.3-19.35-1.05,7.03-3.53,18.35-9.31,27.6-10.87,17.43-23.83,26.42-29.23,29.65,12.12,8,26.63,12.67,42.21,12.67,42.38,0,76.87-34.48,76.87-76.87,0-9.08-1.59-17.79-4.49-25.88-.08.22-.15.44-.24.65-1.76,4.25-5.02,7.42-9.43,9.17-6.69,2.67-14.7,2.08-21.27.72l2.74,4.86c1.37,2.43.51,5.52-1.92,6.89-.78.44-1.64.65-2.48.65-1.77,0-3.48-.92-4.41-2.57l-8.95-15.86c-1.06-1.89-.81-4.24.64-5.86,1.45-1.62,3.76-2.13,5.75-1.28,4.56,1.93,18.15,6.24,26.15,3.06,1.89-.75,3.1-1.91,3.83-3.64,2.14-5.12-.46-13.48-1.64-16.27-.22-.53-.33-1.07-.37-1.61-14.07-18.17-36.08-29.9-60.78-29.9-27.45,0-51.58,14.48-65.18,36.18-.97,6.59-1.5,15.61-.01,19.14,2.19,5.19,10.49,4.63,15.46,3.78-.72-4.75-.54-8.63-.48-9.44.18-2.79,2.57-4.9,5.37-4.72,2.79.18,4.9,2.58,4.72,5.37-.2,3.37.22,13.07,4.56,17.48,1.66,1.68,3.73,2.39,6.54,2.28,3.63-.16,5-1.51,5.71-2.52,3.03-4.27,1.28-13.38.43-16.23-.8-2.67.72-5.49,3.39-6.29,2.67-.8,5.49.7,6.29,3.37.49,1.6,4.57,15.93-1.85,24.99-2.06,2.91-6.08,6.46-13.52,6.79-.34.02-.68.02-1.01.02-5.22,0-9.77-1.84-13.21-5.34-1.71-1.75-3.02-3.79-4.05-5.93-2.62.54-5.52.92-8.48.92-7.74,0-15.75-2.46-19.17-10.59-.07-.16-.12-.35-.19-.52-1.41,5.82-2.18,11.88-2.18,18.12,0,22.56,9.77,42.88,25.3,56.95ZM747.41,187.25c2.56,0,4.65,2.08,4.65,4.65s-2.08,4.65-4.65,4.65-4.65-2.08-4.65-4.65,2.08-4.65,4.65-4.65ZM755.38,149.48c2.43-1.37,5.52-.51,6.89,1.92l7.11,12.6c1.37,2.43.51,5.52-1.92,6.89-.78.44-1.64.65-2.48.65-1.77,0-3.48-.93-4.41-2.57l-7.11-12.6c-1.37-2.43-.51-5.52,1.92-6.89Z"></path>
+    </svg>
+  );
+}
+
+function Wordmark({ width = 200, style, ...rest }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="250 605 245 100"
+      width={width}
+      height={width * 100 / 245}
+      role="img"
+      aria-label="鹿苹視覺 Lupin Visual"
+      style={{ display: "block", ...style }}
+      {...rest}
+    >
+      <g>
+          <g>
+            <path fill="currentColor" d="M298.62,611.3c-4.69-.06-9.5-.06-14.31-.06.62.31,1,.81,1,1.5v3.5c2.87,0,5.5.06,7.5.06,5.44.06,6.06,2.25,6.06,7.31,0,4.12-.19,7-6.5,7.06-3.19.06-7.75.06-12.68.06-6.75,0-14.24,0-19.93-.06-.75,10.56-3.81,22.43-8.5,22.43-1.62,0-3.06-1.31-3.06-3,0-.69.25-1.44.81-2.12,4.62-5.56,5.37-17.62,5.37-26.3,0-3.87-.12-7.06-.19-8.75v-.25c0-4.06,2.69-6.31,6.68-6.37s8.37-.06,12.87-.06v-3.5c0-2.06,1.62-3.06,3.25-3.06s3.25,1,3.25,3.06v3.5c6.18,0,12.43,0,18.37.06,1.62,0,2.44,1.25,2.44,2.5s-.81,2.5-2.37,2.5h-.06ZM269.01,641.41v6.25c2.69-.62,5.12-1.31,7.12-1.94.31-.12.56-.12.81-.12,1.44,0,2.37,1.19,2.37,2.44,0,1.06-.62,2.12-2.19,2.62-8.31,2.81-16.99,4.31-17.87,4.31-1.87,0-2.81-1.37-2.81-2.75s.81-2.56,2.44-2.75c1.56-.19,3.19-.44,4.69-.69v-14.8c0-1.87,1.37-2.81,2.75-2.81s2.69.94,2.69,2.81v2.44h7.31c1.69,0,2.56,1.25,2.56,2.5s-.87,2.5-2.56,2.5h-7.31ZM267.83,612.74c0-.62.38-1.12.94-1.44-2.06,0-4.06.06-6,.06-2.06,0-2.75.87-2.75,2.44v.25l.06,2.25c2.31,0,4.94-.06,7.75-.06v-3.5ZM267.83,620.74h-7.68c0,1.62-.06,3.5-.12,5.43,2.19,0,4.87.06,7.81.12v-5.56ZM280.07,612.74c0-.69.38-1.19,1-1.5h-8.87c.56.31.94.81.94,1.5v3.5h6.93v-3.5ZM280.07,620.74h-6.93v5.62h6.93v-5.62ZM285.69,646.66c0,2.5,1.19,2.87,4.75,2.87,4.31,0,6.18-1.12,6.18-4.62,0-1.75,1.25-2.5,2.5-2.5.25,0,3.12,0,3.12,3.12,0,5.31-2.69,9.12-11.99,9.12-4.75,0-10-.56-10-7.18,0-3.75.06-10.37.12-13.74,0-1.87,1.37-2.75,2.69-2.75s2.75.94,2.75,2.69v.06l-.06,4.25c3.31-1,7.06-2.37,9.87-3.75.38-.19.75-.25,1.12-.25,1.5,0,2.69,1.44,2.69,2.87,0,1.06-.56,2.06-1.94,2.62-3.25,1.31-8.06,2.62-11.81,3.37v3.81ZM285.32,626.36c7.06-.19,7.56-.19,7.81-1.62.06-.19.06-.75.06-1.31,0-2.12-.38-2.62-1.94-2.62s-3.62-.06-5.93-.06v5.62Z"></path>
+            <path fill="currentColor" d="M349.1,609.99v2.44c0,1.69-1.5,2.56-2.94,2.56s-2.75-.81-2.75-2.37v-2.62h-9.62v2.44c0,1.69-1.5,2.56-2.94,2.56s-2.81-.81-2.81-2.37v-2.62h-12.81c-1.87,0-2.81-1.25-2.81-2.44,0-1.31,1-2.62,2.81-2.62l12.81.06v-3.19c0-1.62,1.44-2.44,2.87-2.44s2.87.81,2.87,2.44v3.19h9.62v-3.19c0-1.62,1.44-2.44,2.87-2.44s2.81.81,2.81,2.44v3.19l13.31-.06c1.81,0,2.75,1.25,2.75,2.5,0,1.31-.94,2.56-2.75,2.56h-13.31ZM341.66,640.48v12.43c0,1.69-1.5,2.56-3,2.56s-2.94-.88-2.94-2.56v-12.43l-20.43.12c-1.87,0-2.81-1.37-2.81-2.69s.94-2.75,2.81-2.75l20.43.12.06-14.43-15.8.12c-1.94,0-2.87-1.31-2.87-2.62s.94-2.56,2.87-2.56l19.05.12,19.18-.12c1.75,0,2.62,1.31,2.62,2.56,0,1.31-.87,2.62-2.62,2.62l-16.62-.12.06,14.43,21.18-.12c1.75,0,2.62,1.37,2.62,2.69s-.87,2.75-2.62,2.75l-21.18-.12ZM319.99,633.85c-1.75,0-2.81-1.44-2.81-2.81,0-.94.56-1.87,1.75-2.31,3.87-1.37,6.68-3.06,9.81-5.81.44-.38.94-.56,1.37-.56,1.25,0,2.44,1.31,2.44,2.69,0,.62-.25,1.25-.81,1.81-3.87,3.69-9.87,7-11.74,7ZM354.47,632.48c-2.25-2.31-5.56-4.31-8.37-5.31-1.19-.44-1.69-1.31-1.69-2.19,0-1.25,1-2.5,2.56-2.5,1.87,0,12.24,4.19,12.24,7.93,0,1.56-1.31,2.94-2.81,2.94-.62,0-1.31-.25-1.94-.88Z"></path>
+            <path fill="currentColor" d="M389.01,653.03c0,1.69-1.44,2.56-2.87,2.56s-2.94-.88-2.94-2.56v-.06l.25-20.43c-3.19,2.75-6.12,4.69-7.56,4.69-1.69,0-3-1.37-3-2.87,0-.94.5-1.87,1.62-2.56,10.56-6.18,14.68-15.12,14.68-15.87,0-.62-.81-.69-1.25-.69h-1c-3.37,0-5.62.25-9.12.31h-.06c-1.69,0-2.56-1.38-2.56-2.69s.81-2.62,2.5-2.62c1.75-.06,3.62-.06,5.5-.12l-.06-7c0-1.87,1.44-2.81,2.94-2.81s2.94.94,2.94,2.81l-.06,6.93h1.94c3.31.06,4.87,1.75,4.87,4.06,0,.5-.06,4-6.06,11.74.12,0,.31-.06.5-.06,1.19,0,7.81,3.06,7.81,6.18,0,1.62-1.31,3.06-2.62,3.06-.62,0-1.25-.25-1.81-1-1.31-1.75-3.25-3.25-4.81-4.06.06,9.81.25,22.99.25,22.99v.06ZM393.13,655.47c-2.06,0-3.06-1.5-3.06-3,0-1.25.75-2.44,2.19-2.62,7.5-1,11.56-5.81,12.87-10.81.38-1.56,1.5-2.19,2.62-2.19,1.44,0,3,1.12,3,2.81,0,.25-.06.56-.12.81-3.19,12.06-14.74,14.99-17.49,14.99ZM424.74,643.35c0-1.75,1.25-2.5,2.56-2.5s3,.69,3,3.06c0,6.81-1.62,10.49-9.81,10.49-6.5,0-7.56-3.12-7.56-7.18,0-3.62.06-7.37.19-10.87-2.25,0-4.37-.06-6.43-.12-4.31-.12-6.43-2.56-6.5-6-.06-3.81-.12-8-.12-12.18,0-3.44.06-6.93.12-10.37.06-2.75,1.81-5.56,6.56-5.81,1.81-.12,3.81-.12,5.81-.12s4.06,0,5.93.12c4.12.19,6.5,2.81,6.62,5.75.12,3.62.19,7.43.19,11.31s-.06,7.62-.19,11.24c-.12,3.12-2.5,5.75-6.25,6.06-.12,3.87-.25,7.37-.25,10.37,0,1.62.56,2.37,2.5,2.37,2.5,0,3.62-.25,3.62-4.93v-.69ZM419.56,609.12c0-2.62-.87-2.62-7.25-2.62-4.94,0-6.62,0-6.62,2.69l-.06,2.5h13.99l-.06-2.56ZM419.68,616.36h-14.06v5h14.06v-5ZM405.63,626.05c0,1,.06,2.06.06,3.06.12,2.56,1.5,2.62,6.18,2.62,7,0,7.62-.12,7.68-2.69,0-1,.06-2,.06-3h-13.99Z"></path>
+            <path fill="currentColor" d="M464.97,646.22h-5.06c.62.5,1,1.31,1,2.06,0,2.69-6.93,7.56-21.18,7.56-1.81,0-2.81-1.38-2.81-2.75s.87-2.56,2.62-2.56c10.99-.06,15.37-3,16.74-4.37l-2.75-.06c-4.12-.06-6.18-1.5-6.37-4.62-.06-1.69-.12-3.62-.12-5.56s.06-3.81.12-5.31c.19-2.44,1.69-4.37,6.25-4.44,2.5-.06,5.06-.06,7.62-.06,4.12,0,8.37.06,12.99.12,3.69.06,5.81,1.94,6,4.12.12,1.62.19,3.56.19,5.56s-.06,3.87-.19,5.56c-.25,2.87-2.31,4.62-6.25,4.68-.94,0-1.94.06-2.87.06-.06.56-.06,1.19-.06,1.94.12,2.25,2.44,2.37,5.62,2.37,6.75,0,7.68-1.87,7.68-4.12,0-1.87,1.44-2.75,2.94-2.75,1.75,0,3.31,1.19,3.31,3,0,8.56-9.5,8.62-13.93,8.62-6.31,0-11.49-.31-11.49-5.81v-3.25ZM479.4,617.92h-5.68c-1.44,0-2.12-.94-2.12-1.94,0-.94.69-1.87,2.12-1.87h6l.19-2.12h-6.18c-1.44,0-2.12-1-2.12-1.94,0-1,.69-1.94,2.12-1.94h6.43v-.75c0-1.75-1.44-1.81-2.69-1.81-1.37,0-3.19.06-4.5.12h-.12c-1.44,0-2.19-1-2.19-2.06,0-1.12.81-2.19,2.37-2.25,1-.06,2.31-.06,3.56-.06s2.44,0,3.19.06c3.44.12,5.75,2,5.75,5.25,0,2.06-.5,7.93-.94,13.93,4.75,1.12,4.94,3.62,4.94,7.5,0,2.25-.12,4.68-3.25,4.68-1.5,0-3-.87-3-2.62v-2.62c0-2.31-.19-3.12-3.37-3.19-5-.06-11.74-.12-18.3-.12-5.31,0-10.5.06-14.31.12-3.37.06-3.56.94-3.62,2.37v3.19c0,1.81-1.5,2.81-3,2.81-2.81,0-3-2.25-3-4.87,0-3.12.06-6.62,5.12-7.43-.25-5-.56-10.24-.56-13.18,0-2.37,1.06-4.31,3.87-5.06,1.75-.5,4.94-1.44,6.25-2.06.5-.25,1-.31,1.44-.31,1.62,0,2.81,1.31,2.81,2.62,0,.88-.56,1.75-1.87,2.19-1.44.5-4.25,1.31-5.87,1.62-.94.19-1.25.81-1.25,1.75h6.18c1.37,0,2.06.94,2.06,1.94,0,.94-.69,1.94-2.06,1.94h-6.06l.06,2.19h6c1.37,0,2.06.94,2.06,1.94,0,.94-.69,1.94-2.06,1.94h-5.81l.12,2.31c2.94,0,6.06-.06,9.18-.06-.5-.38-.81-.94-.81-1.5,0-.75.44-1.44,1.5-1.81,1.19-.44,2.25-.94,3.25-1.62-2.06-1.19-2.37-1.37-2.37-2.25,0-1,.87-1.94,2.12-1.94.81,0,1.94.62,3.44,1.5.62-.69,1.25-1.44,1.75-2.12.19-.25.44-.44.69-.56-.44-.06-.94-.31-1.31-.75s-.75-.87-1.25-1.25c-1.12.94-4.31,3.5-5.93,3.5-1.25,0-2.12-1-2.12-1.94,0-.69.38-1.37,1.31-1.75,1.19-.5,2.37-1.25,3.44-2.12-1.62-.81-2.56-1.31-2.56-2.31s.87-1.94,2.12-1.94c.69,0,1.5.38,3.37,1.44.75-.87,1.44-1.75,1.94-2.56.37-.62.94-.87,1.56-.87,1.12,0,2.31.94,2.31,2.12,0,.81-1.5,2.62-2.37,3.56,2,1.56,2,2.12,2,2.56,0,.87-.69,1.75-1.5,2.12,1.06.12,2.12,1.12,2.12,2.19,0,.19,0,.87-2.06,2.94,1.62,1.44,1.87,1.87,1.87,2.5,0,1.19-1.12,2.31-2.31,2.31-.5,0-1.06-.25-1.5-.75-.38-.44-.81-.81-1.31-1.25-1.37,1.06-2.87,1.94-4.37,2.56,6.43,0,13.06,0,18.99.06l.12-2.25ZM474.84,635.04h-22.68v2.12h22.68v-2.12ZM474.71,631.73c-.12-1.87-.31-1.87-13.24-1.87-2.25,0-4.5,0-6.62.06-1.81.06-2.5.81-2.56,1.81v.25h22.43v-.25ZM474.71,640.23h-22.43v.31c.06,1.94.38,1.94,11.24,1.94,2.94,0,5.93,0,8.75-.06,1.5-.06,2.37-.44,2.44-1.87v-.31Z"></path>
+          </g>
+          <g>
+            <path fill="currentColor" d="M253.53,679.12c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v17.09h5.17c1.11,0,2,1.07,2,2.42s-.89,2.42-2,2.42h-7.32c-1.17,0-2.14-1.17-2.14-2.59v-19.34Z"></path>
+            <path fill="currentColor" d="M271.57,691.75v-12.64c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v12.98c0,2.97,1.51,4.45,3.4,4.45s3.46-1.48,3.46-4.45v-12.98c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v12.64c0,5.87-3.4,9.63-7.75,9.63s-7.69-3.76-7.69-9.63Z"></path>
+            <path fill="currentColor" d="M296.15,679.46c0-1.42.97-2.59,2.14-2.59h4.8c3.89,0,6.57,3.42,6.57,7.6s-2.69,7.6-6.57,7.6h-.09c-1.11,0-2-1.07-2-2.42s.89-2.42,2-2.42c1.23-.03,2.23-1.24,2.23-2.76s-1.03-2.76-2.29-2.76h-2.51v17.09c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-19.34Z"></path>
+            <path fill="currentColor" d="M317.68,679.12c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v19.68c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-19.68Z"></path>
+            <path fill="currentColor" d="M331.11,679.25c0-1.52.97-2.73,2.23-2.73.71,0,1.37.41,1.71.93l7.92,11.43v-9.77c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v19.68c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-1.87l-7.57-10.91v12.78c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-19.54Z"></path>
+            <path fill="currentColor" d="M369.7,679.12c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v13.05l10.26-14.78c.37-.55,1-.86,1.54-.86,1.11,0,2,1.07,2,2.42,0,.52-.09,1-.46,1.55l-13.78,19.86c-.51.76-1.14,1.04-1.71,1.04-1.17,0-2.14-1.17-2.14-2.59v-19.68Z"></path>
+            <path fill="currentColor" d="M395.52,679.12c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v19.68c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-19.68Z"></path>
+            <path fill="currentColor" d="M408.38,695.86c0-1.42.97-2.59,2.14-2.59.86,0,1.37.55,1.74,1.17.57.93,1,2.11,2.54,2.11,1.29,0,2.29-1.21,2.29-2.76s-1.2-2.18-2.69-2.76l-1.46-.59c-2.17-.86-4.43-2.49-4.43-7.04,0-3.9,2.77-6.87,6.29-6.87,3.77,0,6.12,3.31,6.12,5.14,0,1.42-.97,2.59-2.14,2.59-.83,0-1.26-.48-1.66-1.07-.54-.83-1-1.83-2.31-1.83-1.11,0-2,1.07-2,2.38,0,1.42,1.09,2.11,2.26,2.56l1.23.48c2.4.93,5.09,2.35,5.09,7.35,0,4.14-2.89,7.25-6.57,7.25s-6.43-3.38-6.43-5.53Z"></path>
+            <path fill="currentColor" d="M429.96,691.75v-12.64c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v12.98c0,2.97,1.51,4.45,3.4,4.45s3.46-1.48,3.46-4.45v-12.98c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v12.64c0,5.87-3.4,9.63-7.75,9.63s-7.69-3.76-7.69-9.63Z"></path>
+            <path fill="currentColor" d="M465.63,677.56c.51-.76,1.14-1.04,1.71-1.04,1.17,0,2.14,1.17,2.14,2.59v19.68c0,1.42-.97,2.59-2.14,2.59s-2.14-1.17-2.14-2.59v-1.9h-2.63c-1.11,0-2-1.07-2-2.42s.89-2.42,2-2.42h2.63v-6.32l-10.26,14.78c-.34.48-1,.86-1.54.86-1.11,0-2-1.07-2-2.42,0-.52.09-1,.46-1.55l13.78-19.85Z"></path>
+            <path fill="currentColor" d="M478.64,679.12c0-1.42.97-2.59,2.14-2.59s2.14,1.17,2.14,2.59v17.09h5.17c1.11,0,2,1.07,2,2.42s-.89,2.42-2,2.42h-7.32c-1.17,0-2.14-1.17-2.14-2.59v-19.34Z"></path>
+          </g>
+        </g>
+    </svg>
+  );
+}
+
+// Horizontal lockup: symbol + wordmark side by side
+function LockupH({ width = 400, variant = "filled", style, ...rest }) {
+  const SymbolComp = variant === "outline" ? BrandMarkOutline : BrandMark;
+  const symSize = width * 0.28;
+  return (
+    <div style={{ display: "inline-flex", alignItems: "center", gap: width * 0.05, color: "currentColor", ...style }} {...rest}>
+      <SymbolComp size={symSize} />
+      <Wordmark width={width * 0.62} />
+    </div>
+  );
+}
+
+// Stacked lockup: symbol above wordmark
+function LockupStacked({ width = 240, variant = "filled", style, ...rest }) {
+  const SymbolComp = variant === "outline" ? BrandMarkOutline : BrandMark;
+  const symSize = width * 0.55;
+  return (
+    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: width * 0.08, color: "currentColor", ...style }} {...rest}>
+      <SymbolComp size={symSize} />
+      <Wordmark width={width * 0.92} />
+    </div>
+  );
+}
+
+Object.assign(window, { BrandMark, BrandMarkOutline, Wordmark, LockupH, LockupStacked });
+
+</script>
+
+<script type="text/babel">
+// Small shared primitives used across sections.
+
+const { useState, useEffect, useRef, useMemo } = React;
+
+function SectionHeader({ num, eyebrow, title, sub, id }) {
+  return (
+    <header id={id} style={{ marginBottom: 56 }}>
+      <div className="eyebrow">
+        <span className="num">{num}</span>
+        <span>{eyebrow}</span>
+      </div>
+      <h2 className="section-title" dangerouslySetInnerHTML={{ __html: title }} />
+      {sub && <p className="section-sub">{sub}</p>}
+    </header>
+  );
+}
+
+// Generic labelled tile with caption underneath
+function LabeledTile({ label, caption, children, tone = "default", style }) {
+  const cls = `logo-tile ${tone !== "default" ? tone : ""}`;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10, ...style }}>
+      <div className={cls}>
+        {children}
+        {caption && <span className="cap">{caption}</span>}
+      </div>
+      {label && (
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingLeft: 2 }}>
+          <span style={{ fontFamily: "var(--heading-font)", fontWeight: 600, fontSize: 14 }}>{label}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Deer symbol SVG (simplified) — used when we want a pure-SVG glyph we can recolour.
+// This is an abstract deer-with-antlers mark inspired by the Lupin logo,
+// drawn in SVG so it can be tinted with currentColor.
+function DeerSymbol({ size = 80, color = "currentColor", stroke = 0, bg = null }) {
+  // A stylised deer face with antlers ( antlers = w-like curves, face = soft round shape with eye + mouth )
+  const s = size;
+  return (
+    <svg width={s} height={s} viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {bg && <circle cx="60" cy="60" r="58" fill={bg} />}
+      <g fill={stroke > 0 ? "none" : color} stroke={stroke > 0 ? color : "none"} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">
+        {/* Antlers - two hooked prongs */}
+        <path d="M30 42 C 26 30, 30 24, 36 26 C 41 28, 40 36, 43 40 C 46 44, 46 48, 42 50" />
+        <path d="M90 42 C 94 30, 90 24, 84 26 C 79 28, 80 36, 77 40 C 74 44, 74 48, 78 50" />
+        {/* Between antlers small nub */}
+        <path d="M52 40 C 54 34, 56 34, 58 38 C 60 42, 60 42, 62 38 C 64 34, 66 34, 68 40" />
+        {/* Head — soft rounded triangle */}
+        <path d="M40 52 C 38 72, 50 92, 60 92 C 70 92, 82 78, 82 60 C 82 54, 80 50, 74 48 L 46 48 C 42 48, 40 50, 40 52 Z" />
+      </g>
+      {/* Eye — always visible, punched out */}
+      <circle cx="66" cy="64" r="2.2" fill={bg ? color : "var(--bg)"} />
+    </svg>
+  );
+}
+
+window.SectionHeader = SectionHeader;
+window.LabeledTile = LabeledTile;
+window.DeerSymbol = DeerSymbol;
+
+</script>
+
+<script type="text/babel">
+// Cover / title section
+
+function CoverSection({ theme, themeMeta }) {
+  const year = "2026";
+  return (
+    <section className="sys" style={{ paddingTop: 80, paddingBottom: 60 }}>
+      <div className="container">
+        {/* Top meta bar */}
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          marginBottom: 72, gap: 24, flexWrap: "wrap"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span className="kicker">Visual Identity System</span>
+            <span className="kicker" style={{ opacity: 0.6 }}>·</span>
+            <span className="kicker">Vol. 01</span>
+            <span className="kicker" style={{ opacity: 0.6 }}>·</span>
+            <span className="kicker">{year}</span>
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <span className="kicker">Theme</span>
+            <span style={{
+              fontFamily: "var(--mono-font)",
+              fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase",
+              padding: "6px 14px",
+              background: "var(--brand-soft)", color: "var(--brand-deep)",
+              borderRadius: "var(--radius-pill)",
+            }}>
+              {themeMeta.name}
+            </span>
+          </div>
+        </div>
+
+        {/* Giant title block */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "end" }}>
+          <div>
+            <h1 style={{
+              fontFamily: "var(--display-font)",
+              fontWeight: 700,
+              fontSize: "clamp(56px, 10vw, 148px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.035em",
+              margin: 0,
+              textWrap: "balance",
+            }}>
+              Lupin<br/>
+              <span style={{
+                fontStyle: theme === "editorial" ? "italic" : "normal",
+                fontWeight: theme === "editorial" ? 400 : 700,
+                color: "var(--brand)",
+              }}>Visual</span>
+            </h1>
+            <div style={{
+              marginTop: 32,
+              fontFamily: "var(--body-font)",
+              fontSize: 17,
+              lineHeight: 1.7,
+              color: "var(--fg-muted)",
+              maxWidth: 540,
+            }}>
+              鹿苹視覺 · Strategic Design Partner<br/>
+              這是一份關於我們如何被看見、被記得、被信任的系統規範。
+              從 logo 的一毫米邊距，到簡報的第一個字級 — 所有細節，都長在同一棵樹上。
+            </div>
+          </div>
+
+          <div className="cover-symbol" style={{ justifySelf: "end", alignSelf: "end" }}>
+            <img
+              src="assets/symbol-stacked.svg"
+              alt="Lupin Visual"
+              style={{
+                width: "clamp(180px, 22vw, 280px)",
+                height: "auto",
+                filter: theme === "editorial" ? "none" : "none",
+                mixBlendMode: theme === "warm-craft" ? "multiply" : "normal",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Meta strip under title */}
+        <div style={{
+          marginTop: 96,
+          paddingTop: 24,
+          borderTop: "1px solid var(--hairline)",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 24,
+        }} className="cover-meta">
+          {[
+            ["Studio", "Lupin Visual\n鹿苹視覺工作室"],
+            ["Practice", "Strategic Design\n設計訂閱制服務"],
+            ["System", "Dual-Slot\n任務排程 · Notion Portal"],
+            ["Document", "v1.0 · Apr 2026\n內部 / 合作夥伴通用"],
+          ].map(([k, v]) => (
+            <div key={k}>
+              <div className="kicker" style={{ marginBottom: 8 }}>{k}</div>
+              <div style={{
+                fontFamily: "var(--heading-font)",
+                fontWeight: 500,
+                fontSize: 14,
+                lineHeight: 1.5,
+                whiteSpace: "pre-line",
+              }}>{v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .cover-symbol { display: none; }
+          .cover-meta { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+window.CoverSection = CoverSection;
+
+</script>
+
+<script type="text/babel">
+// Logo usage section — uses inline SVG components from logo-svg.jsx
+// (BrandMark, BrandMarkOutline, Wordmark, LockupH, LockupStacked)
+// All SVGs use currentColor so they inherit from CSS `color`.
+
+function LogoSection({ theme }) {
+  return (
+    <section className="sys" id="logo">
+      <div className="container">
+        <SectionHeader
+          num="01"
+          eyebrow="Logo System"
+          title="<em>標誌</em>系統"
+          sub="主標誌以「鹿」為核心符號 — 鹿在漢字文化中象徵聰慧、敏銳與貴氣，而 Lupin 的鹿頭以一個溫柔的 'w' 構成，暗示我們願意放下嚴肅，與客戶並肩探索。所有標誌皆為向量 SVG，可無限縮放與變色。"
+        />
+
+        {/* Primary lockups */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>1.1 · Primary Lockups · 主要組合</div>
+        </div>
+
+        <div className="grid g2" style={{ marginBottom: 64 }}>
+          <LabeledTile label="橫式組合 · Horizontal Lockup" caption="A. PRIMARY" tone="default">
+            <div style={{ color: "var(--brand)" }}>
+              <LockupH width={340} />
+            </div>
+          </LabeledTile>
+          <LabeledTile label="直式組合 · Stacked Lockup" caption="B. STACKED" tone="default">
+            <div style={{ color: "var(--brand)" }}>
+              <LockupStacked width={200} />
+            </div>
+          </LabeledTile>
+        </div>
+
+        {/* Color variants */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>1.2 · Color Variants · 單色變體</div>
+        </div>
+
+        <div className="grid g4" style={{ marginBottom: 64 }}>
+          <LabeledTile label="Primary" caption="BRAND · FILLED" tone="default">
+            <div style={{ color: "var(--brand)" }}><BrandMark size={120} /></div>
+          </LabeledTile>
+          <LabeledTile label="Mono · Dark" caption="INK · FILLED" tone="default">
+            <div style={{ color: "var(--fg)" }}><BrandMark size={120} /></div>
+          </LabeledTile>
+          <LabeledTile label="Line · Brand" caption="BRAND · OUTLINE" tone="default">
+            <div style={{ color: "var(--brand)" }}><BrandMarkOutline size={120} /></div>
+          </LabeledTile>
+          <LabeledTile label="Line · Mono" caption="INK · OUTLINE" tone="default">
+            <div style={{ color: "var(--fg)" }}><BrandMarkOutline size={120} /></div>
+          </LabeledTile>
+        </div>
+
+        {/* Background tests */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>1.3 · On Backgrounds · 反白適應</div>
+        </div>
+        <div className="grid g4" style={{ marginBottom: 64 }}>
+          <LabeledTile label="On Light" caption="DEFAULT" tone="cream">
+            <div style={{ color: "var(--brand)" }}><LockupH width={260} /></div>
+          </LabeledTile>
+          <LabeledTile label="On Dark" caption="INVERSE" tone="dark">
+            <div style={{ color: "var(--bg)" }}><LockupH width={260} /></div>
+          </LabeledTile>
+          <LabeledTile label="On Brand" caption="BRAND FIELD" tone="teal">
+            <div style={{ color: "var(--fg)" }}><LockupH width={260} /></div>
+          </LabeledTile>
+          <LabeledTile label="On Accent" caption="ACCENT FIELD" tone="accent">
+            <div style={{ color: "#fff" }}><LockupH width={260} /></div>
+          </LabeledTile>
+        </div>
+
+        {/* Safe area + min size */}
+        <div className="grid g2" style={{ marginBottom: 64 }}>
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 14 }}>1.4 · Clear Space · 安全留白</div>
+            <div style={{
+              background: "var(--brand-soft)",
+              padding: 48,
+              borderRadius: "var(--radius-m)",
+              position: "relative",
+              aspectRatio: "16 / 9",
+              display: "grid",
+              placeItems: "center",
+            }}>
+              <ClearSpaceDiagram />
+            </div>
+            <p style={{ marginTop: 16, fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.6 }}>
+              以 logo 的「眼」為基準單位 <b style={{ color: "var(--fg)" }}>X</b>，四周至少留白 <b style={{ color: "var(--fg)" }}>2X</b>。
+              在任何排版中，不得有其他視覺元素闖入此空間。
+            </p>
+          </div>
+
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 14 }}>1.5 · Minimum Size · 最小尺寸</div>
+            <div style={{
+              padding: 48,
+              borderRadius: "var(--radius-m)",
+              background: "var(--brand-soft)",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-around",
+              aspectRatio: "16 / 9",
+              color: "var(--brand)",
+            }}>
+              <div style={{ textAlign: "center" }}>
+                <BrandMark size={72} />
+                <div className="mono" style={{ fontSize: 11, marginTop: 8, color: "var(--fg-muted)" }}>24 px · 數位最小</div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <BrandMark size={48} />
+                <div className="mono" style={{ fontSize: 11, marginTop: 8, color: "var(--fg-muted)" }}>16 px · 特殊 favicon</div>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <LockupH width={180} />
+                <div className="mono" style={{ fontSize: 11, marginTop: 8, color: "var(--fg-muted)" }}>Print 40 mm 寬</div>
+              </div>
+            </div>
+            <p style={{ marginTop: 16, fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.6 }}>
+              單獨符號不得小於 <b style={{ color: "var(--fg)" }}>24 × 24 px</b>。
+              完整組合版於印刷時不得小於 <b style={{ color: "var(--fg)" }}>40 mm</b> 寬，以確保中文「鹿苹視覺」清晰可辨。
+            </p>
+          </div>
+        </div>
+
+        {/* Misuse */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>1.6 · Misuse · 禁用範例</div>
+        </div>
+        <div className="grid g4">
+          {[
+            { label: "請勿變形", transform: "scaleX(1.3)" },
+            { label: "請勿改色", color: "#7A3FD6" },
+            { label: "請勿旋轉", transform: "rotate(-12deg)" },
+            { label: "請勿加陰影", filter: "drop-shadow(6px 6px 0 rgba(0,0,0,0.5))" },
+          ].map((m, i) => (
+            <div key={i} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <div className="logo-tile" style={{ minHeight: 160, position: "relative" }}>
+                <div style={{ color: m.color || "var(--brand)", transform: m.transform, filter: m.filter }}>
+                  <BrandMark size={90} />
+                </div>
+                <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
+                  <line x1="0" y1="0" x2="100%" y2="100%" stroke="var(--accent)" strokeWidth="2" opacity="0.5"/>
+                </svg>
+                <span className="cap" style={{ color: "var(--accent)" }}>✕ DON'T</span>
+              </div>
+              <div style={{ fontFamily: "var(--heading-font)", fontWeight: 600, fontSize: 14 }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function ClearSpaceDiagram() {
+  return (
+    <div style={{ position: "relative", padding: 40 }}>
+      <div style={{
+        position: "absolute", inset: 0,
+        border: "1.5px dashed var(--brand)",
+        borderRadius: 8,
+        opacity: 0.6,
+      }} />
+      <div style={{
+        position: "absolute", inset: 20,
+        border: "1px dashed var(--fg-faint)",
+        borderRadius: 6,
+        opacity: 0.7,
+      }} />
+      <div style={{ color: "var(--brand)" }}>
+        <LockupH width={220} />
+      </div>
+      <div style={{
+        position: "absolute", top: 4, left: 4,
+        fontFamily: "var(--mono-font)", fontSize: 10,
+        color: "var(--brand-deep)",
+        letterSpacing: "0.14em",
+      }}>2X</div>
+      <div style={{
+        position: "absolute", top: 24, left: 24,
+        fontFamily: "var(--mono-font)", fontSize: 10,
+        color: "var(--fg-faint)",
+        letterSpacing: "0.14em",
+      }}>X</div>
+    </div>
+  );
+}
+
+window.LogoSection = LogoSection;
+
+</script>
+
+<script type="text/babel">
+// Color system section — expanded palette with proper accent hierarchy.
+// Each theme has: primary brand color, anchor, background, + supporting accents.
+// Coral is deliberate: it is the SEMANTIC ALERT color, used sparingly (≤3%).
+
+const COLOR_DEFS = {
+  "soft-tech": {
+    core: [
+      { name: "Cream",     zh: "米白",   hex: "#F9F7F0", role: "Background",     ratio: "60%", onDark: false, token: "brand-light",     note: "背景主色。非純白，帶暖調。" },
+      { name: "Navy",      zh: "深藍",   hex: "#072A40", role: "Ink · Anchor",   ratio: "25%", onDark: true,  token: "brand-dark",      note: "文字主色、Footer。專業沉穩。" },
+      { name: "Teal",      zh: "青碧",   hex: "#18B7BE", role: "Primary · CTA",  ratio: "10%", onDark: true,  token: "brand-primary",   note: "品牌色。轉化點、連結、CTA。" },
+      { name: "Dark Teal", zh: "深青",   hex: "#178CA4", role: "Hover · Depth",  ratio: "3%",  onDark: true,  token: "brand-secondary", note: "Hover、漸層深端、次要深色。" },
+    ],
+    // Semantic/support accents — explicitly NOT for general decoration
+    accent: [
+      { name: "Coral",     zh: "珊瑚",   hex: "#F43F5E", role: "Alert · Error",     token: "accent-alert",   note: "錯誤提示、表單驗證、訂閱到期。克制使用 ≤ 2%。" },
+      { name: "Amber",     zh: "琥珀",   hex: "#F59E0B", role: "Warning · Pending", token: "accent-warn",    note: "等待、審核中、草稿狀態。" },
+      { name: "Leaf",      zh: "葉綠",   hex: "#10B981", role: "Success · Live",    token: "accent-success", note: "交付完成、任務達成、上線。" },
+      { name: "Lilac",     zh: "淺紫",   hex: "#A78BFA", role: "Insight · Special", token: "accent-info",    note: "策略洞察、AI 輸出、特殊內容標記。" },
+    ],
+    neutrals: [
+      { name: "Slate 50",  hex: "#F8FAFC", token: "slate-50"  },
+      { name: "Slate 200", hex: "#E2E8F0", token: "slate-200" },
+      { name: "Slate 400", hex: "#94A3B8", token: "slate-400" },
+      { name: "Slate 600", hex: "#475569", token: "slate-600" },
+      { name: "Slate 800", hex: "#1E293B", token: "slate-800" },
+    ],
+  },
+  "editorial": {
+    core: [
+      { name: "Paper",     zh: "紙白",   hex: "#FAFAF8", role: "Canvas",         ratio: "65%", onDark: false, token: "paper", note: "近乎純白的紙感底色。" },
+      { name: "Ink",       zh: "墨黑",   hex: "#0A0A0A", role: "Ink · Rule",     ratio: "25%", onDark: true,  token: "ink",   note: "鋒利的純黑，所有版面結構的脊樑。" },
+      { name: "Teal",      zh: "青",     hex: "#127A7F", role: "Accent",         ratio: "7%",  onDark: true,  token: "accent", note: "唯一主色調。較暗沉的青，像印章油墨。" },
+      { name: "Ash",       zh: "灰燼",   hex: "#737373", role: "Secondary",      ratio: "3%",  onDark: true,  token: "ash",   note: "說明文字、次要元素。" },
+    ],
+    accent: [
+      { name: "Rust",      zh: "鐵鏽",   hex: "#9A3B2C", role: "Alert",             token: "accent-alert",   note: "低飽和的鐵鏽紅，而非鮮豔警示色。" },
+      { name: "Ochre",     zh: "赭黃",   hex: "#B8823E", role: "Highlight",         token: "accent-warn",    note: "引用、強調段落的色塊襯底。" },
+      { name: "Moss",      zh: "苔綠",   hex: "#516D3E", role: "Success",           token: "accent-success", note: "低彩度的苔綠，保持版面肅穆。" },
+    ],
+    neutrals: [
+      { name: "Paper+",    hex: "#F5F5F2", token: "paper-100" },
+      { name: "Stone",     hex: "#E5E4E0", token: "stone"     },
+      { name: "Ash",       hex: "#737373", token: "ash"       },
+      { name: "Graphite",  hex: "#2A2A2A", token: "graphite"  },
+    ],
+  },
+  "warm-paper": {
+    core: [
+      { name: "Paper",     zh: "紙白",   hex: "#FAFAF8", role: "Background",    ratio: "60%", onDark: false, token: "paper",   note: "帶溫度的近白底色，不刺眼。" },
+      { name: "Ink",       zh: "墨黑",   hex: "#0A0A0A", role: "Ink · Anchor",  ratio: "25%", onDark: true,  token: "ink",     note: "文字主色。清晰、無妥協。" },
+      { name: "Teal",      zh: "靜青",   hex: "#127A7F", role: "Primary · CTA", ratio: "10%", onDark: true,  token: "teal",    note: "品牌色。沉穩的青，像舊印章。" },
+      { name: "Copper",    zh: "暖銅",   hex: "#C07855", role: "Warm Accent",   ratio: "5%",  onDark: true,  token: "copper",  note: "取代重複的墨黑 accent，帶入溫度。" },
+    ],
+    accent: [
+      { name: "Coral",     zh: "珊瑚",   hex: "#E8604A", role: "Alert · Error",     token: "accent-alert",   note: "錯誤提示、表單驗證。克制使用。" },
+      { name: "Amber",     zh: "琥珀",   hex: "#D4943A", role: "Warning · Pending", token: "accent-warn",    note: "等待中、草稿、審核狀態。" },
+      { name: "Sage",      zh: "鼠尾草", hex: "#4F9068", role: "Success · Live",    token: "accent-success", note: "交付完成、上線。" },
+    ],
+    neutrals: [
+      { name: "Paper+",    hex: "#F5F4F0", token: "paper-100" },
+      { name: "Stone",     hex: "#E0DDD7", token: "stone"     },
+      { name: "Ash",       hex: "#8A8480", token: "ash"       },
+      { name: "Graphite",  hex: "#2E2C2A", token: "graphite"  },
+    ],
+  },
+  "warm-craft": {
+    core: [
+      { name: "Linen",     zh: "亞麻",   hex: "#F3ECDD", role: "Background",     ratio: "55%", onDark: false, token: "linen",      note: "帶纖維感的米色底。" },
+      { name: "Umber",     zh: "深棕",   hex: "#2B1A12", role: "Ink · Anchor",   ratio: "25%", onDark: true,  token: "umber",      note: "深褐色主文，像濃咖啡。" },
+      { name: "Terracotta",zh: "赤陶",   hex: "#C85A3E", role: "Primary",        ratio: "12%", onDark: true,  token: "terracotta", note: "招牌色，溫暖又有重量。" },
+      { name: "Teal",      zh: "藍綠",   hex: "#16807F", role: "Counterpoint",   ratio: "5%",  onDark: true,  token: "teal",       note: "與赤陶互補，製造對比。" },
+    ],
+    accent: [
+      { name: "Saffron",   zh: "番紅",   hex: "#E8A04A", role: "Highlight",         token: "accent-warn",    note: "溫暖的薑黃色，用於引言色塊。" },
+      { name: "Olive",     zh: "橄欖",   hex: "#6B7A3A", role: "Success · Nature",  token: "accent-success", note: "天然橄欖綠，有機感。" },
+      { name: "Ink Blue",  zh: "墨藍",   hex: "#2A3F5F", role: "Deep Accent",       token: "accent-info",    note: "深夜藍，裝訂感、印刷感。" },
+      { name: "Cream",     zh: "奶白",   hex: "#FBF7EC", role: "Card Elevate",      token: "cream",          note: "浮在亞麻底上的更亮紙色。" },
+    ],
+    neutrals: [
+      { name: "Linen+",    hex: "#EFE6D2", token: "linen-200" },
+      { name: "Sand",      hex: "#D9CBA8", token: "sand"      },
+      { name: "Clay",      hex: "#8B6F5C", token: "clay"      },
+      { name: "Bark",      hex: "#5A3E2B", token: "bark"      },
+    ],
+  },
+};
+
+const GRADIENTS_BY_THEME = {
+  "soft-tech": [
+    { name: "Primary Gradient",  css: "linear-gradient(120deg, #18B7BE, #178CA4)", use: "強調文字 · 圖標背景 · 裝飾圓球" },
+    { name: "Dark Gradient",     css: "linear-gradient(120deg, #072A40, #178CA4)", use: "深色卡片 · Footer 裝飾" },
+    { name: "Aurora",            css: "linear-gradient(120deg, #18B7BE, #A78BFA)", use: "特殊活動 · 里程碑慶祝" },
+  ],
+  "editorial": [
+    { name: "Ink Wash",          css: "linear-gradient(120deg, #0A0A0A, #4A4A4A)", use: "區塊分隔 · 重點引文" },
+    { name: "Paper Fade",        css: "linear-gradient(180deg, #FAFAF8, #E8E4D8)", use: "大面積襯底 · Hero 背景" },
+  ],
+  "warm-paper": [
+    { name: "Teal Depth",    css: "linear-gradient(120deg, #127A7F, #0E5B5F)", use: "品牌強調 · 深色卡片裝飾" },
+    { name: "Paper Wash",    css: "linear-gradient(180deg, #FAFAF8, #EDE9E0)", use: "大面積背景層次 · Hero 底" },
+    { name: "Copper Warm",   css: "linear-gradient(120deg, #C07855, #E8A078)", use: "特殊 CTA · 暖色強調點" },
+  ],
+  "warm-craft": [
+    { name: "Sunset",            css: "linear-gradient(120deg, #C85A3E, #E8A04A)", use: "主要 CTA · 標題底" },
+    { name: "Ember",             css: "linear-gradient(120deg, #2B1A12, #C85A3E)", use: "深色區塊裝飾" },
+    { name: "Linen Wash",        css: "linear-gradient(180deg, #F3ECDD, #E4D9BF)", use: "章節襯底" },
+  ],
+};
+
+function ColorSection({ theme }) {
+  const def = COLOR_DEFS[theme];
+  const core = def.core;
+  const accents = def.accent;
+  const neutrals = def.neutrals;
+  const grads = GRADIENTS_BY_THEME[theme];
+
+  return (
+    <section className="sys" id="color" style={{ background: "var(--bg)" }}>
+      <div className="container">
+        <SectionHeader
+          num="02"
+          eyebrow="Color System"
+          title="<em>色彩</em>系統"
+          sub="配色遵守 60 · 25 · 10 · 5 的視覺節奏 — 大面積的中性底、安靜的文字主色、品牌色用於轉化點。下方輔助色僅用於『語意狀態』（警示、成功、洞察），不作為裝飾。"
+        />
+
+        {/* Core palette */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>2.1 · Core Palette · 核心色票</div>
+        </div>
+        <div className="grid g4" style={{ marginBottom: 48 }}>
+          {core.map((c) => (
+            <div key={c.name} className="swatch" style={{
+              background: c.hex,
+              color: c.onDark ? "#fff" : "var(--fg)",
+            }}>
+              <div>
+                <div className="ratio">{c.role}</div>
+                <div className="name" style={{ marginTop: 6 }}>{c.name}</div>
+                <div style={{ fontFamily: "var(--body-font)", fontSize: 13, opacity: 0.75 }}>{c.zh}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, opacity: 0.8, marginBottom: 12, lineHeight: 1.5, fontFamily: "var(--body-font)" }}>
+                  {c.note}
+                </div>
+                <div className="meta"><b>Hex</b>{c.hex}</div>
+                <div className="meta" style={{ marginTop: 8 }}><b>Token</b>--{c.token}</div>
+                <div className="meta" style={{ marginTop: 8 }}><b>Usage</b>{c.ratio}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Proportion bar */}
+        <div style={{ marginBottom: 72 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>2.2 · Usage Ratio · 視覺佔比 (核心色)</div>
+          <div style={{ display: "flex", borderRadius: "var(--radius-m)", overflow: "hidden", height: 64 }}>
+            {core.map((c) => (
+              <div key={c.name} style={{
+                flex: parseFloat(c.ratio),
+                background: c.hex,
+                color: c.onDark ? "#fff" : "var(--fg)",
+                display: "flex", alignItems: "center", justifyContent: "flex-start",
+                padding: "0 16px",
+                fontFamily: "var(--mono-font)", fontSize: 11, letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}>
+                <span style={{ opacity: 0.9 }}>{c.name} · {c.ratio}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Semantic accents */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>2.3 · Semantic Accents · 語意輔助色</div>
+          <p style={{ fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.7, maxWidth: 720, marginBottom: 24 }}>
+            這些顏色有 <b style={{ color: "var(--fg)" }}>明確語意用途</b>，不用於視覺裝飾。
+            例如：錯誤提示（Alert）、等待中（Warning）、成功交付（Success）、AI 洞察（Insight）。
+            每種輔助色使用比例皆 <b style={{ color: "var(--fg)" }}>≤ 2%</b>，避免稀釋主色效果。
+          </p>
+        </div>
+        <div className="grid g4" style={{ marginBottom: 72 }}>
+          {accents.map((c) => (
+            <div key={c.name} style={{
+              borderRadius: "var(--radius-m)",
+              overflow: "hidden",
+              border: "1px solid var(--line)",
+              background: "var(--surface)",
+            }}>
+              <div style={{
+                height: 120,
+                background: c.hex,
+                display: "flex", alignItems: "flex-end",
+                padding: 16,
+                color: "#fff",
+                fontFamily: "var(--mono-font)",
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}>
+                {c.role}
+              </div>
+              <div style={{ padding: 20 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 6 }}>
+                  <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 18 }}>{c.name}</div>
+                  <div style={{ fontSize: 13, color: "var(--fg-muted)" }}>{c.zh}</div>
+                </div>
+                <div className="mono" style={{ fontSize: 11, color: "var(--fg-muted)", marginBottom: 10 }}>
+                  {c.hex} · --{c.token}
+                </div>
+                <div style={{ fontSize: 13, color: "var(--fg-muted)", lineHeight: 1.6 }}>
+                  {c.note}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Neutrals */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>2.4 · Neutrals · 中性灰階</div>
+          <p style={{ fontSize: 14, color: "var(--fg-muted)", lineHeight: 1.7, maxWidth: 720, marginBottom: 24 }}>
+            用於邊線、分隔線、次要文字、表單背景等結構性元素。避免用純黑 / 純白。
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${neutrals.length}, 1fr)`, gap: 12, marginBottom: 72 }}>
+          {neutrals.map((n) => (
+            <div key={n.name} style={{
+              borderRadius: "var(--radius-s)",
+              overflow: "hidden",
+              border: "1px solid var(--line)",
+            }}>
+              <div style={{ height: 80, background: n.hex }} />
+              <div style={{ padding: "10px 12px", background: "var(--surface)" }}>
+                <div style={{ fontFamily: "var(--heading-font)", fontWeight: 600, fontSize: 13 }}>{n.name}</div>
+                <div className="mono" style={{ fontSize: 10, color: "var(--fg-muted)", marginTop: 2 }}>{n.hex}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Gradients */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>2.5 · Gradients · 漸層</div>
+        </div>
+        <div className="grid g3">
+          {grads.map((g) => (
+            <div key={g.name} className="card" style={{ padding: 0, overflow: "hidden" }}>
+              <div style={{ height: 180, background: g.css }} />
+              <div style={{ padding: 24 }}>
+                <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 18 }}>{g.name}</div>
+                <div className="mono" style={{ fontSize: 11, color: "var(--fg-muted)", marginTop: 8, wordBreak: "break-all" }}>{g.css}</div>
+                <div style={{ fontSize: 13, color: "var(--fg-muted)", marginTop: 12, lineHeight: 1.6 }}>{g.use}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+window.ColorSection = ColorSection;
+
+</script>
+
+<script type="text/babel">
+// Typography section
+
+function TypeSection({ theme }) {
+  // Type pairings differ per theme
+  const pairings = {
+    "soft-tech": {
+      display: { name: "Plus Jakarta Sans", family: "'Plus Jakarta Sans', sans-serif", role: "Display · Heading", weights: "300 → 800" },
+      body:    { name: "Noto Sans TC",       family: "'Noto Sans TC', sans-serif",       role: "Body · 中文內文",  weights: "300 → 900" },
+      mono:    { name: "JetBrains Mono",     family: "'JetBrains Mono', monospace",       role: "Mono · 技術標示", weights: "400 / 500 / 600" },
+    },
+    "editorial": {
+      display: { name: "Fraunces",           family: "'Fraunces', serif",                  role: "Display · Heading", weights: "300 → 900, Italic" },
+      body:    { name: "Noto Sans TC",       family: "'Noto Sans TC', sans-serif",         role: "Body · 中文內文",   weights: "300 → 700" },
+      mono:    { name: "JetBrains Mono",     family: "'JetBrains Mono', monospace",         role: "Label · 編號",      weights: "400 / 500" },
+    },
+    "warm-paper": {
+      display: { name: "Plus Jakarta Sans", family: "'Plus Jakarta Sans', sans-serif",     role: "Display · Heading",  weights: "300 → 800" },
+      body:    { name: "Noto Sans TC",      family: "'Noto Sans TC', sans-serif",          role: "Body · 中文內文",    weights: "300 → 700" },
+      mono:    { name: "JetBrains Mono",    family: "'JetBrains Mono', monospace",          role: "Label · 技術標示",   weights: "400 / 500" },
+    },
+    "warm-craft": {
+      display: { name: "Fraunces",           family: "'Fraunces', serif",                  role: "Display · Headline", weights: "400 → 800, Italic" },
+      body:    { name: "Noto Sans TC",       family: "'Noto Sans TC', sans-serif",         role: "Body · 中文內文",    weights: "400 / 500 / 700" },
+      mono:    { name: "JetBrains Mono",     family: "'JetBrains Mono', monospace",         role: "Meta · 日期戳印",     weights: "500" },
+    },
+  }[theme] || {
+    display: { name: "Plus Jakarta Sans", family: "'Plus Jakarta Sans', sans-serif", role: "Display", weights: "400 → 800" },
+    body:    { name: "Noto Sans TC",      family: "'Noto Sans TC', sans-serif",      role: "Body",    weights: "400 / 700" },
+    mono:    { name: "JetBrains Mono",    family: "'JetBrains Mono', monospace",      role: "Mono",    weights: "400 / 500" },
+  };
+
+  const scale = [
+    { lbl: "Display XL", tag: "H1", desktop: "72", mobile: "36", weight: 700, use: "首頁 Hero 主標題", text: "一起設計下一個十年" },
+    { lbl: "Display L",  tag: "H2", desktop: "48", mobile: "30", weight: 700, use: "區塊標題",         text: "策略設計合作夥伴" },
+    { lbl: "Display M",  tag: "H3", desktop: "36", mobile: "24", weight: 700, use: "卡片標題",         text: "訂閱制服務方案" },
+    { lbl: "Heading S",  tag: "H4", desktop: "24", mobile: "20", weight: 700, use: "模態視窗標題",     text: "Dual-Slot 任務排程系統" },
+    { lbl: "Body L",     tag: "p",  desktop: "18", mobile: "16", weight: 400, use: "文章引言",         text: "我們相信，設計不是交付物，而是一段持續的合作。" },
+    { lbl: "Body M",     tag: "p",  desktop: "16", mobile: "14", weight: 400, use: "一般內文",         text: "透過 Notion Client Portal，您可以即時追蹤每個需求從提出到交付的每個環節。" },
+    { lbl: "Label",      tag: "H6", desktop: "14", mobile: "12", weight: 700, use: "分類標籤 (CAPS)",  text: "STRATEGIC DESIGN PARTNER" },
+  ];
+
+  return (
+    <section className="sys" id="type">
+      <div className="container">
+        <SectionHeader
+          num="03"
+          eyebrow="Typography"
+          title="<em>字型</em>系統"
+          sub="雙語系配置 — 英文標題取幾何與結構，中文內文取易讀與呼吸。字體只用三種，但透過字級與字重形成豐富的層次。"
+        />
+
+        {/* Font families showcase */}
+        <div className="grid g3" style={{ marginBottom: 64 }}>
+          {[pairings.display, pairings.body, pairings.mono].map((f, i) => (
+            <div className="card" key={i} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div className="kicker">{["Display", "Body", "Mono"][i]}</div>
+              <div style={{
+                fontFamily: f.family,
+                fontSize: 64,
+                fontWeight: i === 0 ? 700 : (i === 2 ? 500 : 500),
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+                fontStyle: (theme === "editorial" || theme === "warm-craft") && i === 0 ? "italic" : "normal",
+              }}>
+                {i === 1 ? "鹿苹" : "Aa"}
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--heading-font)", fontWeight: 600, fontSize: 18 }}>{f.name}</div>
+                <div style={{ fontSize: 13, color: "var(--fg-muted)", marginTop: 4 }}>{f.role}</div>
+                <div className="mono" style={{ fontSize: 11, color: "var(--fg-faint)", marginTop: 10, letterSpacing: "0.1em" }}>{f.weights}</div>
+              </div>
+              <div style={{ fontFamily: f.family, fontSize: 12, color: "var(--fg-muted)", letterSpacing: f === pairings.mono ? "0.08em" : "normal" }}>
+                ABCDEFGHIJKLMNOP<br/>
+                0123456789 &amp; ?!@
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Type scale */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>3.2 · Type Scale · 字級階層</div>
+        </div>
+        <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+          {scale.map((s, i) => (
+            <div key={s.lbl} style={{
+              display: "grid",
+              gridTemplateColumns: "140px 1fr auto",
+              gap: 32,
+              padding: "28px 32px",
+              alignItems: "baseline",
+              borderTop: i === 0 ? "none" : "1px solid var(--hairline)",
+            }}>
+              <div>
+                <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 13 }}>{s.lbl}</div>
+                <div className="mono" style={{ fontSize: 10, color: "var(--fg-faint)", letterSpacing: "0.14em", marginTop: 4 }}>
+                  {s.tag} · {s.desktop}/{s.mobile} px
+                </div>
+              </div>
+              <div style={{
+                fontFamily: s.lbl === "Label" ? "var(--mono-font)" : (s.weight >= 700 ? "var(--display-font)" : "var(--body-font)"),
+                fontSize: `clamp(${parseInt(s.mobile)}px, ${parseInt(s.desktop) * 0.8}px, ${s.desktop}px)`,
+                fontWeight: s.weight,
+                lineHeight: s.weight >= 700 ? 1.15 : 1.5,
+                letterSpacing: s.lbl === "Label" ? "0.1em" : "-0.01em",
+                textTransform: s.lbl === "Label" ? "uppercase" : "none",
+                fontStyle: theme === "editorial" && s.weight >= 700 ? "italic" : "normal",
+              }}>
+                {s.text}
+              </div>
+              <div style={{ fontSize: 12, color: "var(--fg-muted)", whiteSpace: "nowrap" }}>{s.use}</div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+window.TypeSection = TypeSection;
+
+</script>
+
+<script type="text/babel">
+// Auxiliary pattern & graphics
+
+function PatternSection({ theme }) {
+  return (
+    <section className="sys" id="pattern" style={{ background: "var(--bg)" }}>
+      <div className="container">
+        <SectionHeader
+          num="04"
+          eyebrow="Auxiliary Graphics"
+          title="<em>輔助</em>圖形"
+          sub="從 logo 中萃取三個單元作為輔助視覺：鹿角曲線、眼睛小圓點、封閉面部輪廓。重複排列成 Pattern，或單獨作為指引標記。"
+        />
+
+        <div className="grid g3" style={{ marginBottom: 64 }}>
+          <PatternTile name="Antler Grid · 鹿角陣列" caption="主要 PATTERN">
+            <AntlerPattern />
+          </PatternTile>
+          <PatternTile name="Dotted Trail · 眼點軌跡" caption="次要 · 留白點綴">
+            <DotTrail />
+          </PatternTile>
+          <PatternTile name="Curved Rule · 線條輪廓" caption="線性裝飾 · Divider">
+            <CurvedRule />
+          </PatternTile>
+        </div>
+
+        {/* Decorative marks */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>4.2 · Decorative Marks · 裝飾符號</div>
+        </div>
+        <div className="grid g4">
+          {[
+            { label: "Bullet · 項目", el: <Bullet /> },
+            { label: "Divider · 分隔", el: <Divider /> },
+            { label: "Quote · 引言", el: <QuoteMark /> },
+            { label: "Arrow · 指引", el: <ArrowMark /> },
+          ].map((m, i) => (
+            <div key={i} className="card" style={{ aspectRatio: "1", display: "grid", placeItems: "center", gap: 16 }}>
+              <div>{m.el}</div>
+              <div style={{
+                position: "absolute", bottom: 16, left: 20,
+                fontFamily: "var(--mono-font)", fontSize: 11, color: "var(--fg-muted)",
+                letterSpacing: "0.12em", textTransform: "uppercase",
+              }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function PatternTile({ name, caption, children }) {
+  return (
+    <div>
+      <div style={{
+        aspectRatio: "1",
+        borderRadius: "var(--radius-l)",
+        overflow: "hidden",
+        background: "var(--brand)",
+        position: "relative",
+      }}>
+        {children}
+        <span style={{
+          position: "absolute", bottom: 14, left: 18,
+          fontFamily: "var(--mono-font)", fontSize: 10,
+          color: "rgba(255,255,255,0.7)",
+          letterSpacing: "0.16em", textTransform: "uppercase",
+        }}>{caption}</span>
+      </div>
+      <div style={{ marginTop: 12, fontFamily: "var(--heading-font)", fontWeight: 600, fontSize: 14 }}>{name}</div>
+    </div>
+  );
+}
+
+function AntlerPattern() {
+  // Repeating rows of the antler glyph
+  const rows = 4, cols = 4;
+  const items = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      items.push(
+        <img
+          key={`${r}-${c}`}
+          src="assets/symbol-black-fill.svg"
+          alt=""
+          style={{
+            position: "absolute",
+            width: "22%",
+            top: `${(r * 100) / rows + 3}%`,
+            left: `${(c * 100) / cols + ((r % 2) * 50) / cols}%`,
+            opacity: 0.85,
+            filter: "brightness(0) invert(1)",
+            transform: `rotate(${((r + c) % 2) * 8 - 4}deg)`,
+          }}
+        />
+      );
+    }
+  }
+  return <div style={{ position: "absolute", inset: 0 }}>{items}</div>;
+}
+
+function DotTrail() {
+  const dots = [];
+  for (let i = 0; i < 60; i++) {
+    dots.push(
+      <div key={i} style={{
+        position: "absolute",
+        width: 10 + Math.random() * 14,
+        height: 10 + Math.random() * 14,
+        borderRadius: "50%",
+        background: "var(--bg)",
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        opacity: 0.2 + Math.random() * 0.6,
+      }} />
+    );
+  }
+  return <div style={{ position: "absolute", inset: 0 }}>{dots}</div>;
+}
+
+function CurvedRule() {
+  return (
+    <svg viewBox="0 0 200 200" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+      {[...Array(8)].map((_, i) => (
+        <path
+          key={i}
+          d={`M 0 ${30 + i * 22} Q 50 ${10 + i * 22}, 100 ${30 + i * 22} T 200 ${30 + i * 22}`}
+          fill="none"
+          stroke="var(--bg)"
+          strokeWidth="1.5"
+          opacity={0.3 + (i % 3) * 0.2}
+        />
+      ))}
+    </svg>
+  );
+}
+
+function Bullet() {
+  return (
+    <svg width="72" height="72" viewBox="0 0 72 72">
+      <circle cx="36" cy="36" r="6" fill="var(--brand)" />
+      <circle cx="36" cy="36" r="18" fill="none" stroke="var(--brand)" strokeWidth="1.5" opacity="0.4"/>
+      <circle cx="36" cy="36" r="30" fill="none" stroke="var(--brand)" strokeWidth="1" opacity="0.2"/>
+    </svg>
+  );
+}
+
+function Divider() {
+  return (
+    <svg width="120" height="40" viewBox="0 0 120 40">
+      <circle cx="10" cy="20" r="3" fill="var(--brand)" />
+      <path d="M 20 20 L 100 20" stroke="var(--brand)" strokeWidth="1.5"/>
+      <circle cx="110" cy="20" r="3" fill="var(--brand)" />
+    </svg>
+  );
+}
+
+function QuoteMark() {
+  return (
+    <div style={{
+      fontFamily: "var(--serif-font)",
+      fontSize: 96,
+      fontWeight: 700,
+      color: "var(--brand)",
+      lineHeight: 1,
+      fontStyle: "italic",
+    }}>“</div>
+  );
+}
+
+function ArrowMark() {
+  return (
+    <svg width="80" height="40" viewBox="0 0 80 40">
+      <path d="M 5 20 L 70 20" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M 55 8 L 70 20 L 55 32" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+}
+
+window.PatternSection = PatternSection;
+
+</script>
+
+<script type="text/babel">
+// Web UI components section
+
+function ComponentsSection({ theme }) {
+  const [email, setEmail] = React.useState("");
+
+  return (
+    <section className="sys" id="components">
+      <div className="container">
+        <SectionHeader
+          num="05"
+          eyebrow="Web UI Kit"
+          title="<em>介面</em>元件"
+          sub="所有元件遵守「膠囊形 · 超圓角」的共同語言，並在互動時以輕微的位移與色彩變化回應使用者。"
+        />
+
+        <div className="grid g2" style={{ marginBottom: 48 }}>
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 18 }}>5.1 · Buttons</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
+              <button className="btn filled">開始合作 →</button>
+              <button className="btn primary">查看作品</button>
+              <button className="btn outline">了解服務</button>
+              <button className="btn tonal">最新消息</button>
+            </div>
+            <div className="mono" style={{ fontSize: 11, color: "var(--fg-muted)", letterSpacing: "0.1em" }}>
+              FILLED · PRIMARY · OUTLINED · TONAL
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 18 }}>5.2 · Input · Subscription</div>
+            <div style={{
+              display: "flex", gap: 8,
+              padding: 6,
+              background: "var(--bg)",
+              borderRadius: "var(--radius-pill)",
+              border: "1px solid var(--hairline)",
+            }}>
+              <input
+                className="input"
+                placeholder="hi@lupin.studio"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ border: "none", background: "transparent", padding: "10px 18px" }}
+              />
+              <button className="btn primary" style={{ padding: "10px 22px" }}>訂閱</button>
+            </div>
+            <div style={{ marginTop: 20 }}>
+              <input className="input" placeholder="你的公司名稱 ( 單獨 input )" />
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 18 }}>5.3 · Tags · 分類標籤</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {["Brand System", "Web Design", "Product UX", "Editorial", "Motion", "Strategy"].map(t => (
+                <span key={t} className="tag">{t}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="kicker" style={{ marginBottom: 18 }}>5.4 · Card · 作品卡</div>
+            <div style={{
+              borderRadius: "var(--radius-m)",
+              overflow: "hidden",
+              background: "var(--brand)",
+              aspectRatio: "16 / 9",
+              display: "grid", placeItems: "center",
+            }}>
+              <img src="assets/symbol-black-fill.svg" alt="" style={{ width: 80, filter: "brightness(0) invert(1)" }} />
+            </div>
+            <div style={{ marginTop: 16 }}>
+              <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 20, marginBottom: 4 }}>
+                Subscription Dashboard
+              </div>
+              <div style={{ fontSize: 14, color: "var(--fg-muted)" }}>
+                一個為設計訂閱制打造的客戶後台。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Hero mock */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>5.5 · Hero Section · 網站首屏</div>
+        </div>
+
+        <div style={{
+          borderRadius: "var(--radius-xl)",
+          overflow: "hidden",
+          background: "var(--bg-elev)",
+          boxShadow: "var(--shadow-soft)",
+          border: theme === "editorial" ? "1px solid var(--hairline-strong)" : "none",
+        }}>
+          {/* Fake nav */}
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "20px 40px",
+            borderBottom: "1px solid var(--hairline)",
+            backdropFilter: "blur(10px)",
+          }}>
+            <img src="assets/logo-teal-filled.svg" alt="" style={{ height: 36 }} />
+            <nav style={{
+              display: "flex", gap: 28,
+              fontFamily: "var(--heading-font)", fontWeight: 500, fontSize: 14,
+            }}>
+              <a style={{ color: "var(--fg)", textDecoration: "none" }}>服務方案</a>
+              <a style={{ color: "var(--fg-muted)", textDecoration: "none" }}>作品集</a>
+              <a style={{ color: "var(--fg-muted)", textDecoration: "none" }}>關於我們</a>
+              <a style={{ color: "var(--fg-muted)", textDecoration: "none" }}>日誌</a>
+            </nav>
+            <button className="btn primary" style={{ padding: "10px 20px", fontSize: 13 }}>預約諮詢</button>
+          </div>
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 48,
+            padding: "72px 56px",
+            alignItems: "center",
+          }} className="hero-grid">
+            <div>
+              <span className="tag" style={{ marginBottom: 24 }}>Strategic Design Partner</span>
+              <h1 style={{
+                fontFamily: "var(--display-font)",
+                fontWeight: 700,
+                fontSize: "clamp(36px, 4.8vw, 64px)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                margin: "20px 0 24px",
+                textWrap: "balance",
+                fontStyle: theme === "editorial" ? "italic" : "normal",
+              }}>
+                不是一次交付，<br/>
+                而是<span style={{ color: "var(--brand)" }}>長期並肩</span>。
+              </h1>
+              <p style={{ fontSize: 17, lineHeight: 1.7, color: "var(--fg-muted)", marginBottom: 32, maxWidth: 460 }}>
+                鹿苹視覺以設計訂閱制，成為您團隊的外部設計部門。每週穩定產出，透明追蹤，彈性調整。
+              </p>
+              <div style={{ display: "flex", gap: 12 }}>
+                <button className="btn filled">查看方案 →</button>
+                <button className="btn outline">下載簡介</button>
+              </div>
+            </div>
+
+            <div style={{
+              position: "relative",
+              aspectRatio: "4 / 5",
+              borderRadius: "var(--radius-xl)",
+              background: theme === "warm-craft"
+                ? "linear-gradient(135deg, #C85A3E, #E89366)"
+                : (theme === "editorial" ? "var(--bg-inverse)" : "linear-gradient(135deg, #18B7BE, #178CA4)"),
+              display: "grid", placeItems: "center",
+              overflow: "hidden",
+            }}>
+              <img src="assets/symbol-black-fill.svg" alt="" style={{
+                width: "55%",
+                filter: "brightness(0) invert(1)",
+              }} />
+              {/* Decorative floating dots */}
+              <div style={{
+                position: "absolute", top: 40, right: 40,
+                width: 80, height: 80, borderRadius: "50%",
+                background: "rgba(255,255,255,0.15)",
+              }} />
+              <div style={{
+                position: "absolute", bottom: 60, left: 40,
+                width: 40, height: 40, borderRadius: "50%",
+                background: "rgba(255,255,255,0.2)",
+              }} />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <style>{`
+        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </section>
+  );
+}
+
+window.ComponentsSection = ComponentsSection;
+
+</script>
+
+<script type="text/babel">
+// Social media templates (IG square posts) + avatar
+
+function SocialSection({ theme }) {
+  return (
+    <section className="sys" id="social" style={{ background: "var(--bg)" }}>
+      <div className="container">
+        <SectionHeader
+          num="06"
+          eyebrow="Social Media Kit"
+          title="<em>社群</em>版型"
+          sub="三種方形版位模板 — 宣告、知識、引文 — 共用同一套字級與留白節奏，讓 feed 上的連續貼文，看起來像是同一本雜誌的內頁。"
+        />
+
+        {/* Avatar row */}
+        <div style={{ marginBottom: 48 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>6.1 · Avatars · 頭像系統</div>
+          <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <Avatar bg="var(--brand)" symbol="white" size={120} />
+            <Avatar bg="var(--bg-inverse)" symbol="white" size={120} />
+            <Avatar bg="var(--bg)" symbol="brand" border size={120} />
+            <Avatar bg="var(--accent)" symbol="white" size={120} />
+            <div style={{ fontSize: 13, color: "var(--fg-muted)", maxWidth: 300, lineHeight: 1.6 }}>
+              頭像一律使用純符號版本，置中對齊，周圍保留 20% 安全空間。最小適用於 40px。
+            </div>
+          </div>
+        </div>
+
+        {/* IG Grid preview */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>6.2 · Instagram Feed · 3 × 模板</div>
+        </div>
+
+        <div className="grid g3">
+          <IGAnnouncement theme={theme} />
+          <IGKnowledge theme={theme} />
+          <IGQuote theme={theme} />
+        </div>
+
+        {/* 9-grid preview */}
+        <div style={{ marginTop: 64 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>6.3 · Feed Flow · 九宮格節奏預覽</div>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 4,
+            maxWidth: 600,
+            background: "var(--hairline)",
+            padding: 4,
+            borderRadius: "var(--radius-m)",
+          }}>
+            {[0,1,2,3,4,5,6,7,8].map(i => {
+              const kind = i % 3;
+              return (
+                <div key={i} style={{ aspectRatio: "1", overflow: "hidden" }}>
+                  {kind === 0 && <IGAnnouncement theme={theme} mini />}
+                  {kind === 1 && <IGKnowledge theme={theme} mini />}
+                  {kind === 2 && <IGQuote theme={theme} mini />}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Avatar({ bg, symbol, border, size = 96 }) {
+  const src = symbol === "white" ? "assets/symbol-black-fill.svg" : "assets/symbol-teal-fill.png";
+  const filter = symbol === "white" ? "brightness(0) invert(1)" :
+                 symbol === "brand" ? "none" : "none";
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: "50%",
+      background: bg, display: "grid", placeItems: "center",
+      overflow: "hidden",
+      border: border ? "1px solid var(--hairline-strong)" : "none",
+    }}>
+      <img src={src} alt="" style={{ width: "62%", filter }} />
+    </div>
+  );
+}
+
+// IG 1:1 post container
+function IGFrame({ children, bg, mini }) {
+  return (
+    <div style={{
+      aspectRatio: "1",
+      borderRadius: mini ? 0 : "var(--radius-l)",
+      overflow: "hidden",
+      background: bg,
+      position: "relative",
+      boxShadow: mini ? "none" : "var(--shadow-soft)",
+      color: "inherit",
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function IGAnnouncement({ theme, mini }) {
+  return (
+    <IGFrame bg="var(--brand)" mini={mini}>
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: mini ? "8% 8%" : "11% 11%",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+        color: "#fff",
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <img src="assets/symbol-black-fill.svg" alt="" style={{
+            width: mini ? 24 : 44, filter: "brightness(0) invert(1)",
+          }} />
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: mini ? 6 : 10, letterSpacing: "0.18em",
+            opacity: 0.75,
+          }}>
+            APR · 2026
+          </div>
+        </div>
+        <div>
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: mini ? 6 : 10, letterSpacing: "0.2em",
+            opacity: 0.8, marginBottom: mini ? 4 : 12,
+          }}>NEW SERVICE</div>
+          <div style={{
+            fontFamily: "var(--display-font)",
+            fontWeight: 700,
+            fontSize: mini ? 14 : 42,
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            textWrap: "balance",
+            fontStyle: theme === "editorial" ? "italic" : "normal",
+          }}>
+            設計訂閱<br/>正式上線
+          </div>
+          {!mini && <div style={{
+            marginTop: 16,
+            fontSize: 14, opacity: 0.9,
+            maxWidth: "85%", lineHeight: 1.5,
+          }}>
+            雙槽位任務排程 · Notion 專屬 Client Portal
+          </div>}
+        </div>
+      </div>
+    </IGFrame>
+  );
+}
+
+function IGKnowledge({ theme, mini }) {
+  return (
+    <IGFrame bg="var(--bg-elev)" mini={mini}>
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: mini ? "8%" : "11%",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+      }}>
+        <div>
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: mini ? 6 : 10, letterSpacing: "0.2em", textTransform: "uppercase",
+            color: "var(--brand-deep)", marginBottom: mini ? 4 : 16,
+          }}>
+            DESIGN NOTE · 03
+          </div>
+          <div style={{
+            fontFamily: "var(--display-font)",
+            fontWeight: 700,
+            fontSize: mini ? 12 : 36,
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+            color: "var(--fg)",
+            fontStyle: theme === "editorial" ? "italic" : "normal",
+          }}>
+            為什麼設計<br/>
+            <span style={{ color: "var(--brand)" }}>不該被外包？</span>
+          </div>
+          {!mini && <div style={{
+            marginTop: 14,
+            fontSize: 13, lineHeight: 1.6, color: "var(--fg-muted)",
+            maxWidth: "90%",
+          }}>
+            當設計被視為一次性交付，品牌就失去了持續進化的機會。
+          </div>}
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <img src="assets/logo-teal-filled.svg" alt="" style={{ height: mini ? 12 : 28 }} />
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: mini ? 5 : 10, letterSpacing: "0.14em", color: "var(--fg-faint)",
+          }}>@lupin.visual</div>
+        </div>
+      </div>
+    </IGFrame>
+  );
+}
+
+function IGQuote({ theme, mini }) {
+  return (
+    <IGFrame bg="var(--bg-inverse)" mini={mini}>
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: mini ? "8%" : "11%",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+        color: "var(--fg-on-inverse)",
+      }}>
+        <div style={{
+          fontFamily: "var(--serif-font)",
+          fontSize: mini ? 40 : 140,
+          lineHeight: 0.8,
+          color: "var(--brand)",
+          fontStyle: "italic",
+          fontWeight: 500,
+        }}>"</div>
+        <div>
+          <div style={{
+            fontFamily: theme === "warm-craft" ? "var(--serif-font)" : "var(--display-font)",
+            fontSize: mini ? 10 : 26,
+            lineHeight: 1.3,
+            fontWeight: theme === "warm-craft" ? 500 : 600,
+            letterSpacing: "-0.01em",
+            fontStyle: theme === "editorial" || theme === "warm-craft" ? "italic" : "normal",
+          }}>
+            好的設計不是裝飾，<br/>
+            是把複雜的事說清楚。
+          </div>
+          <div style={{
+            marginTop: mini ? 6 : 20,
+            fontFamily: "var(--mono-font)",
+            fontSize: mini ? 5 : 11,
+            letterSpacing: "0.18em", textTransform: "uppercase",
+            opacity: 0.6,
+          }}>
+            — Lupin Visual Studio
+          </div>
+        </div>
+      </div>
+    </IGFrame>
+  );
+}
+
+window.SocialSection = SocialSection;
+
+</script>
+
+<script type="text/babel">
+// Presentation deck templates (cover + inner slide)
+
+function DeckSection({ theme }) {
+  return (
+    <section className="sys" id="deck">
+      <div className="container">
+        <SectionHeader
+          num="07"
+          eyebrow="Presentation System"
+          title="<em>簡報</em>模板"
+          sub="三款核心版型 — 封面、章節分隔、內容頁 — 以 16:9 為基準，保留大片負空間給文字喘息，用色塊與符號標示節奏。"
+        />
+
+        {/* Cover slide */}
+        <div style={{ marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>7.1 · Cover Slide · 封面</div>
+        </div>
+        <DeckCover theme={theme} />
+
+        {/* Section break */}
+        <div style={{ marginTop: 64, marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>7.2 · Section Divider · 章節頁</div>
+        </div>
+        <DeckSectionDivider theme={theme} />
+
+        {/* Content slide */}
+        <div style={{ marginTop: 64, marginBottom: 24 }}>
+          <div className="kicker" style={{ marginBottom: 14 }}>7.3 · Content Slide · 內頁</div>
+        </div>
+        <DeckContent theme={theme} />
+      </div>
+    </section>
+  );
+}
+
+function SlideFrame({ children, bg }) {
+  return (
+    <div style={{
+      aspectRatio: "16 / 9",
+      background: bg || "var(--bg-elev)",
+      borderRadius: "var(--radius-l)",
+      overflow: "hidden",
+      boxShadow: "var(--shadow-soft)",
+      position: "relative",
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function DeckCover({ theme }) {
+  return (
+    <SlideFrame bg="var(--bg-inverse)">
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: "6% 7%",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+        color: "var(--fg-on-inverse)",
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <img src="assets/logo-black-bar.svg" alt="Lupin Visual" style={{ height: 36, filter: "brightness(0) invert(1)" }} />
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: 11, letterSpacing: "0.2em",
+            opacity: 0.5,
+          }}>
+            PROPOSAL · Q2 2026
+          </div>
+        </div>
+
+        <div>
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: 12, letterSpacing: "0.22em",
+            color: "var(--brand)", marginBottom: 20,
+          }}>
+            STRATEGIC DESIGN PARTNERSHIP
+          </div>
+          <div style={{
+            fontFamily: "var(--display-font)",
+            fontWeight: 700,
+            fontSize: "clamp(32px, 4.5vw, 68px)",
+            lineHeight: 1.02,
+            letterSpacing: "-0.025em",
+            maxWidth: "80%",
+            fontStyle: theme === "editorial" ? "italic" : "normal",
+          }}>
+            設計，是<span style={{ color: "var(--brand)" }}>一段關係</span>，<br/>
+            不是一張發票。
+          </div>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div style={{
+            fontFamily: "var(--body-font)",
+            fontSize: 14, opacity: 0.7, lineHeight: 1.6,
+          }}>
+            Prepared for · Acme Ventures Co.<br/>
+            By · Lupin Visual Studio
+          </div>
+          <img src="assets/symbol-black-fill.svg" alt="" style={{
+            width: 80,
+            filter: "brightness(0) invert(1)",
+            opacity: 0.9,
+          }} />
+        </div>
+
+        {/* Decorative corner */}
+        <div style={{
+          position: "absolute", bottom: -120, right: -80,
+          width: 360, height: 360,
+          borderRadius: "50%",
+          background: theme === "warm-craft"
+            ? "radial-gradient(circle, rgba(200,90,62,0.3), transparent 60%)"
+            : "radial-gradient(circle, rgba(24,183,190,0.25), transparent 60%)",
+          pointerEvents: "none",
+        }} />
+      </div>
+    </SlideFrame>
+  );
+}
+
+function DeckSectionDivider({ theme }) {
+  return (
+    <SlideFrame bg="var(--brand)">
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: "6% 7%",
+        display: "flex", flexDirection: "column", justifyContent: "space-between",
+        color: "#fff",
+      }}>
+        <div style={{
+          fontFamily: "var(--mono-font)",
+          fontSize: 12, letterSpacing: "0.22em",
+          opacity: 0.75,
+        }}>
+          02 / 05 · OUR APPROACH
+        </div>
+
+        <div>
+          <div style={{
+            fontFamily: "var(--display-font)",
+            fontWeight: 700,
+            fontSize: "clamp(40px, 6vw, 96px)",
+            lineHeight: 1,
+            letterSpacing: "-0.03em",
+            maxWidth: "90%",
+            fontStyle: theme === "editorial" ? "italic" : "normal",
+          }}>
+            Dual-Slot<br/>
+            <span style={{ fontFamily: "var(--body-font)", fontWeight: 500, fontSize: "0.5em" }}>
+              雙槽位任務排程系統
+            </span>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div style={{ fontSize: 13, opacity: 0.8, maxWidth: "50%", lineHeight: 1.6 }}>
+            兩個任務並行運作，永遠有一個正在交付、一個正在深化。
+          </div>
+          <img src="assets/symbol-black-fill.svg" alt="" style={{
+            width: 60, filter: "brightness(0) invert(1)", opacity: 0.85,
+          }} />
+        </div>
+      </div>
+    </SlideFrame>
+  );
+}
+
+function DeckContent({ theme }) {
+  return (
+    <SlideFrame>
+      <div style={{
+        position: "absolute", inset: 0,
+        padding: "5% 6%",
+        display: "grid",
+        gridTemplateRows: "auto 1fr auto",
+        gap: 24,
+      }}>
+        {/* Top bar */}
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          paddingBottom: 16,
+          borderBottom: "1px solid var(--hairline)",
+        }}>
+          <div style={{
+            fontFamily: "var(--mono-font)",
+            fontSize: 11, letterSpacing: "0.2em",
+            color: "var(--fg-muted)",
+          }}>
+            02 · OUR APPROACH → 02.3 DELIVERY RHYTHM
+          </div>
+          <img src="assets/logo-teal-filled.svg" alt="" style={{ height: 24 }} />
+        </div>
+
+        {/* Content */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1.1fr 1fr",
+          gap: 40,
+          alignItems: "center",
+        }}>
+          <div>
+            <div style={{
+              fontFamily: "var(--mono-font)",
+              fontSize: 12, letterSpacing: "0.2em",
+              color: "var(--brand-deep)",
+              marginBottom: 14,
+            }}>
+              KEY INSIGHT
+            </div>
+            <div style={{
+              fontFamily: "var(--display-font)",
+              fontWeight: 700,
+              fontSize: 36,
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+              marginBottom: 20,
+              fontStyle: theme === "editorial" ? "italic" : "normal",
+            }}>
+              每週交付兩個<br/>
+              <span style={{ color: "var(--brand)" }}>可驗證的進展</span>
+            </div>
+            <div style={{
+              fontSize: 15, lineHeight: 1.7, color: "var(--fg-muted)",
+              maxWidth: "90%",
+            }}>
+              一個長線任務深化策略，一個短線任務快速交付 — 讓設計既有累積感，也有即時滿足。
+            </div>
+          </div>
+
+          {/* Chart / illustration */}
+          <div style={{
+            borderRadius: "var(--radius-m)",
+            background: "var(--brand-soft)",
+            padding: 24,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            justifyContent: "center",
+          }}>
+            {[
+              { w: "Slot A · 策略深化", p: 70, col: "var(--brand)" },
+              { w: "Slot B · 快速交付", p: 90, col: "var(--brand-deep)" },
+              { w: "Review · 週會", p: 35, col: "var(--accent)" },
+            ].map((row, i) => (
+              <div key={i}>
+                <div style={{
+                  display: "flex", justifyContent: "space-between",
+                  fontSize: 12, fontFamily: "var(--heading-font)",
+                  marginBottom: 6, fontWeight: 600,
+                }}>
+                  <span>{row.w}</span>
+                  <span className="mono" style={{ color: "var(--fg-muted)" }}>{row.p}%</span>
+                </div>
+                <div style={{
+                  height: 10, borderRadius: 999,
+                  background: "rgba(0,0,0,0.06)",
+                  overflow: "hidden",
+                }}>
+                  <div style={{ width: `${row.p}%`, height: "100%", background: row.col, borderRadius: 999 }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div style={{
+          display: "flex", justifyContent: "space-between",
+          fontFamily: "var(--mono-font)",
+          fontSize: 11, letterSpacing: "0.14em",
+          color: "var(--fg-faint)",
+          paddingTop: 12, borderTop: "1px solid var(--hairline)",
+        }}>
+          <span>LUPIN VISUAL · STRATEGIC DESIGN PARTNER</span>
+          <span>PAGE 07 / 24</span>
+        </div>
+      </div>
+    </SlideFrame>
+  );
+}
+
+window.DeckSection = DeckSection;
+
+</script>
+
+<script type="text/babel">
+// Root app — theme switcher + tweaks panel + section orchestration
+
+const { useState: useStateRoot, useEffect: useEffectRoot } = React;
+
+function App() {
+  const defaults = (window.LUPIN_TWEAKS || {});
+  const [theme, setTheme] = useStateRoot(defaults.theme || "soft-tech");
+  const [editMode, setEditMode] = useStateRoot(false);
+
+  // Apply theme to root
+  useEffectRoot(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  // Restore from localStorage
+  useEffectRoot(() => {
+    const saved = localStorage.getItem("lupin:theme");
+    if (saved && ["soft-tech", "editorial", "warm-paper", "warm-craft"].includes(saved)) {
+      setTheme(saved);
+    }
+  }, []);
+
+  useEffectRoot(() => {
+    localStorage.setItem("lupin:theme", theme);
+  }, [theme]);
+
+  // Edit mode listener for tweaks toggle
+  useEffectRoot(() => {
+    function onMsg(e) {
+      if (!e.data || typeof e.data !== "object") return;
+      if (e.data.type === "__activate_edit_mode") setEditMode(true);
+      if (e.data.type === "__deactivate_edit_mode") setEditMode(false);
+    }
+    window.addEventListener("message", onMsg);
+    // announce availability after listener is registered
+    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  function updateTheme(next) {
+    setTheme(next);
+    window.parent.postMessage({
+      type: "__edit_mode_set_keys",
+      edits: { theme: next },
+    }, "*");
+  }
+
+  const themeMeta = THEMES.find(t => t.id === theme);
+
+  return (
+    <div className="page" data-screen-label="Lupin Visual Identity System">
+      <TopNav theme={theme} themeMeta={themeMeta} onChangeTheme={updateTheme} />
+      <CoverSection theme={theme} themeMeta={themeMeta} />
+      <ThemePicker theme={theme} onChangeTheme={updateTheme} />
+      <LogoSection theme={theme} />
+      <ColorSection theme={theme} />
+      <TypeSection theme={theme} />
+      <PatternSection theme={theme} />
+      <ComponentsSection theme={theme} />
+      <SocialSection theme={theme} />
+      <DeckSection theme={theme} />
+      <Footer theme={theme} />
+      {editMode && <TweaksPanel theme={theme} onChangeTheme={updateTheme} />}
+    </div>
+  );
+}
+
+function TopNav({ theme, themeMeta, onChangeTheme }) {
+  return (
+    <header className="topnav">
+      <div className="container topnav-inner">
+        <a href="#top" className="brand" style={{ textDecoration: "none", color: "inherit" }}>
+          <span className="mark" style={{ background: "var(--brand)" }}>
+            <img src="assets/symbol-black-fill.svg" alt="" style={{ filter: "brightness(0) invert(1)" }}/>
+          </span>
+          <span>Lupin Visual · <span style={{ color: "var(--fg-muted)", fontWeight: 500 }}>VI System</span></span>
+        </a>
+        <nav>
+          <a href="#logo">01 Logo</a>
+          <a href="#color">02 Color</a>
+          <a href="#type">03 Type</a>
+          <a href="#pattern">04 Pattern</a>
+          <a href="#components">05 UI</a>
+          <a href="#social">06 Social</a>
+          <a href="#deck">07 Deck</a>
+        </nav>
+        <span className="theme-badge">{themeMeta.name}</span>
+      </div>
+    </header>
+  );
+}
+
+function ThemePicker({ theme, onChangeTheme }) {
+  return (
+    <section className="sys" style={{ paddingTop: 40, paddingBottom: 40 }}>
+      <div className="container">
+        <div className="kicker" style={{ marginBottom: 14 }}>00 · Theme Explorations · 三種調性</div>
+        <p style={{
+          fontSize: 18, lineHeight: 1.7, color: "var(--fg-muted)",
+          maxWidth: "62ch", marginTop: 0, marginBottom: 32,
+        }}>
+          同一套 logo，可以用三種不同的氣質被敘述。點擊下方任一張卡片，整份識別系統會即時切換。
+        </p>
+        <div className="grid g4">
+          {THEMES.map(t => (
+            <button
+              key={t.id}
+              onClick={() => onChangeTheme(t.id)}
+              style={{
+                textAlign: "left",
+                padding: 24,
+                borderRadius: "var(--radius-l)",
+                border: theme === t.id
+                  ? "2px solid var(--brand)"
+                  : "1px solid var(--hairline-strong)",
+                background: theme === t.id ? "var(--brand-soft)" : "var(--bg-elev)",
+                cursor: "pointer",
+                transition: "all .3s ease",
+                position: "relative",
+                color: "var(--fg)",
+              }}
+            >
+              {/* Swatches row */}
+              <div style={{ display: "flex", gap: 6, marginBottom: 20 }}>
+                {t.palette.map((c, i) => (
+                  <div key={i} style={{
+                    width: 28, height: 28, borderRadius: "50%",
+                    background: c,
+                    border: "1px solid rgba(0,0,0,0.08)",
+                  }} />
+                ))}
+              </div>
+              <div className="mono" style={{
+                fontSize: 11, letterSpacing: "0.18em",
+                color: "var(--fg-muted)", marginBottom: 6,
+              }}>
+                {t.id === theme ? "● ACTIVE" : `0${THEMES.indexOf(t) + 1} · VARIANT`}
+              </div>
+              <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 22, marginBottom: 4 }}>
+                {t.name}
+              </div>
+              <div style={{ fontSize: 13, color: "var(--fg-muted)", marginBottom: 14 }}>{t.zh}</div>
+              <div style={{ fontSize: 13, lineHeight: 1.6, color: "var(--fg-muted)" }}>{t.description}</div>
+              <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {t.keywords.map(k => (
+                  <span key={k} style={{
+                    fontFamily: "var(--mono-font)", fontSize: 10, letterSpacing: "0.1em",
+                    padding: "4px 10px", borderRadius: 999,
+                    background: "rgba(0,0,0,0.05)", color: "var(--fg-muted)",
+                  }}>{k}</span>
+                ))}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TweaksPanel({ theme, onChangeTheme }) {
+  return (
+    <div className="tweaks">
+      <h5>Tweaks · 識別系統切換</h5>
+      <div className="row">
+        <label>Theme</label>
+        <div className="seg" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+          {THEMES.map(t => (
+            <button
+              key={t.id}
+              className={theme === t.id ? "active" : ""}
+              onClick={() => onChangeTheme(t.id)}
+            >{t.name.split(" ")[0]}</button>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <label>Quick Links</label>
+        <div style={{
+          display: "grid", gridTemplateColumns: "1fr 1fr",
+          gap: 6,
+        }}>
+          {[
+            ["Logo", "#logo"], ["Color", "#color"],
+            ["Type", "#type"], ["UI", "#components"],
+            ["Social", "#social"], ["Deck", "#deck"],
+          ].map(([label, href]) => (
+            <a key={href} href={href} style={{
+              fontFamily: "var(--mono-font)", fontSize: 10, letterSpacing: "0.1em",
+              padding: "6px 10px", borderRadius: "var(--radius-pill)",
+              background: "var(--brand-soft)", color: "var(--fg)",
+              textDecoration: "none", textAlign: "center",
+            }}>{label.toUpperCase()}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Footer({ theme }) {
+  return (
+    <footer style={{
+      borderTop: "1px solid var(--hairline)",
+      padding: "56px 0",
+      marginTop: 40,
+    }}>
+      <div className="container" style={{
+        display: "flex", justifyContent: "space-between",
+        alignItems: "center", flexWrap: "wrap", gap: 20,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <img src="assets/symbol-teal-fill.svg" alt="" style={{ width: 36 }} />
+          <div>
+            <div style={{ fontFamily: "var(--heading-font)", fontWeight: 700, fontSize: 15 }}>
+              鹿苹視覺 Lupin Visual
+            </div>
+            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--fg-muted)" }}>
+              VISUAL IDENTITY SYSTEM · v1.0 · APRIL 2026
+            </div>
+          </div>
+        </div>
+        <div className="mono" style={{ fontSize: 11, letterSpacing: "0.16em", color: "var(--fg-faint)" }}>
+          © LUPIN VISUAL STUDIO · ALL RIGHTS RESERVED
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// Boot
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+
+</body>
+</html>

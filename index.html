@@ -540,7 +540,7 @@ const THEMES = [
     name: "Soft Tech",
     zh: "柔性科技",
     description: "現有 Design System — Teal + Navy + Cream，超圓角、膠囊形、毛玻璃。專業且親切，最適合科技產品溝通。",
-    palette: ["#F9F7F0", "#18B7BE", "#072A40", "#F43F5E"],
+    palette: ["#F9F7F0", "#18B7BE", "#072A40", "#C07855"],
     keywords: ["Rounded", "Glassmorphism", "Calm", "Trustworthy"],
   },
   {
@@ -1058,6 +1058,7 @@ const COLOR_DEFS = {
     ],
     // Semantic/support accents — explicitly NOT for general decoration
     accent: [
+      { name: "Copper",    zh: "暖銅",   hex: "#C07855", role: "Warm Accent",       token: "accent",         note: "主要 accent 色。設計感溫度，卡片 highlight、標籤。" },
       { name: "Coral",     zh: "珊瑚",   hex: "#F43F5E", role: "Alert · Error",     token: "accent-alert",   note: "錯誤提示、表單驗證、訂閱到期。克制使用 ≤ 2%。" },
       { name: "Amber",     zh: "琥珀",   hex: "#F59E0B", role: "Warning · Pending", token: "accent-warn",    note: "等待、審核中、草稿狀態。" },
       { name: "Leaf",      zh: "葉綠",   hex: "#10B981", role: "Success · Live",    token: "accent-success", note: "交付完成、任務達成、上線。" },
@@ -1098,6 +1099,7 @@ const COLOR_DEFS = {
       { name: "Copper",    zh: "暖銅",   hex: "#C07855", role: "Warm Accent",   ratio: "5%",  onDark: true,  token: "copper",  note: "取代重複的墨黑 accent，帶入溫度。" },
     ],
     accent: [
+      { name: "Sky",       zh: "天藍",   hex: "#4A90C4", role: "Info · Link",       token: "info",           note: "資訊提示、連結色。藍藍的，不搶 Teal。" },
       { name: "Coral",     zh: "珊瑚",   hex: "#E8604A", role: "Alert · Error",     token: "accent-alert",   note: "錯誤提示、表單驗證。克制使用。" },
       { name: "Amber",     zh: "琥珀",   hex: "#D4943A", role: "Warning · Pending", token: "accent-warn",    note: "等待中、草稿、審核狀態。" },
       { name: "Sage",      zh: "鼠尾草", hex: "#4F9068", role: "Success · Live",    token: "accent-success", note: "交付完成、上線。" },
@@ -1879,7 +1881,7 @@ function SocialSection({ theme }) {
 }
 
 function Avatar({ bg, symbol, border, size = 96 }) {
-  const src = symbol === "white" ? "assets/symbol-black-fill.svg" : "assets/symbol-teal-fill.png";
+  const src = symbol === "white" ? "assets/symbol-black-fill.svg" : "assets/symbol-teal-fill.svg";
   const filter = symbol === "white" ? "brightness(0) invert(1)" :
                  symbol === "brand" ? "none" : "none";
   return (
